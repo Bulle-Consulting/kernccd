@@ -534,7 +534,7 @@
           <div class="alliance-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <div class="alliance-text">
             <strong data-i18n="lift_title">LIFT Alliance — Leadership Institute for Tomorrow</strong>
-            <p data-i18n="lift_desc">Kern CCD is one of seven Tier 1 grantees in the 2026–2028 EEO IBP initiative. The dashboard tracks the VR Faculty Development & Peer Mentoring Program across the district's three colleges: Bakersfield, Cerro Coso, and Porterville.</p>
+            <p data-i18n="lift_desc">The program runs across the district's three colleges — Bakersfield College, Cerro Coso Community College, and Porterville College — and is led by Bobby Becka, Rachel Tatro-Duarte (Porterville), and Todd Coston (AVC of Planning and Educational Technology). Executive sponsor: Chancellor Steven Bloomberg.</p>
           </div>
         </div>
 
@@ -719,27 +719,45 @@
 ════════════════════════════════════════════════════════════════ */
 const districts = [
 
-  {
-    id:'kern', name:'Kern CCD', shortName:'Kern CCD',
+    {
+    id:'kern', name:'Kern Community College District', shortName:'Kern CCD',
     program:'VR EEO Faculty Development and Peer Mentoring Program',
     tier:1, funding:150000, lift:false,
-    focus:['VR Technology','Faculty Development','Peer Mentoring'],
+    focus:['Virtual Reality','Faculty Development','Peer Mentoring','Inclusive Pedagogy'],
     outcomes:[
-      '60 Meta Quest 3 VR headsets deployed across 3 district colleges',
-      'Virtual Reality faculty development 6-session training series',
-      '20 faculty stipends for VR training and curriculum integration (Year 2)',
-      'District-wide digital lesson catalog of VR-enhanced lessons',
-      'Faculty peer mentoring pairs across all disciplines',
-      'Districtwide showcase of faculty VR innovations',
-      'VR content creation training using Unity tools'
+      'Access & Equity Across Colleges/Disciplines: ≥30 faculty trained across all three colleges, with participation proportional to each campus\u2019s FTES (±5%) and ≥35% non-STEM representation',
+      'Professional Development Effectiveness: ≥75% of participants report increased confidence using VR (pre/post survey) and ≥60% implement at least one VR-enhanced lesson within the grant year',
+      'Implementation & Knowledge Sharing: Searchable repository of ≥35 documented VR lessons, with ≥30% of lessons adopted across campuses (developed at one college, implemented at another)',
+      'Leadership Pipeline Development: ≥40% of Year-1 participants advance to mentor roles in Year-2 and ≥25% of alumni document new leadership/service in professional portfolios',
+      'Student Engagement & Equity: In participating sections, ≥70% of students report increased engagement/interest (post-lesson survey), with no engagement gap >10 percentage points between student demographic groups'
     ],
-    contact:{name:'Bobby Becka',role:'Project Lead',email:'bobby.becka@kccd.edu',phone:'(661) 395-4102'},
-    altContact:{name:'Rachel Tatro-Duarte',role:'Project Lead',email:'rachel.tatroduarte@portervillecollege.edu',phone:'(559) 791-2200'},
-    fiscalReporter:{name:'Cathi Jacob',role:'Fiscal Reporter',email:'cjacob@kccd.edu',phone:'(661) 336-5078'},
+    contact:{name:'Bobby Becka',role:'Project Lead Contact',email:'bobby.becka@kccd.edu',phone:'(661) 395-4102'},
+    altContact:{name:'Dr. Bonita Steele',role:'Alternate Project Lead Contact',email:'bsteele@kccd.edu',phone:'(661) 336-5046'},
+    fiscalReporter:{name:'Cathi Jacob',role:'Institution Project Fiscal Reporter',email:'cjacob@kccd.edu',phone:'(661) 336-5105'},
     planApprover:{name:'Melissa Thornsberry',role:'Plan Approver',email:'melissa.thornsberry@kccd.edu',phone:'(661) 336-5142'},
-    budgetHighlights:{'Certificated Salaries (1000)':32660,'Employee Benefits (3000)':7074,'Supplies & Equipment (4000)':90750,'Services (5000)':12020,'Indirect (7000)':7496},
-    yearlyBudget:{y1:122238,y2:27762},
-    primaryFocus:'VR Faculty Development'
+    additionalContacts:[
+      {name:'Rachel Tatro-Duarte',role:'Project Lead Contact (Porterville)',email:'rachel.tatroduarte@portervillecollege.edu',phone:''},
+      {name:'Todd Coston',role:'Project Lead Contact · AVC Planning & Educational Technology',email:'tcoston@kccd.edu',phone:'(661) 336-5078'},
+      {name:'Jonathan Kim',role:'Institution Project Fiscal Reporter',email:'jonathan.kim@kccd.edu',phone:'(661) 336-5109'},
+      {name:'Bryan Lainez',role:'Institution Project Fiscal Reporter',email:'bryan.lainez@kccd.edu',phone:''},
+      {name:'Marisol Cuevas',role:'Institution Project Fiscal Reporter',email:'marisol.cuevas@kccd.edu',phone:'(661) 336-5110'}
+    ],
+    fundMonitor:{name:'Marrin Thuston',role:'Fund Monitor · CCCCO',email:'mthuston@cccco.edu',phone:''},
+    budgetHighlights:{'Instructional Salaries (1000)':32660,'Employee Benefits (3000)':7074,'Supplies and Materials (4000)':90750,'Other Operating Expenses and Services (5000)':12020,'Indirect Costs (7000)':7496},
+    yearlyBudget:{y1:122638,y2:27362},
+    fiscalYearBudget:{'2025-26':50735,'2026-27':71903,'2027-28':27362},
+    primaryFocus:'VR Faculty Development & Peer Mentoring',
+    submittedBy:'Bobby Becka',
+    submittedAt:'Jul 31, 2025',
+    leadAddress:'2100 Chester Avenue, Bakersfield, CA 93301',
+    colleges:['Bakersfield College','Cerro Coso Community College','Porterville College'],
+    executiveSponsor:'Chancellor Steven Bloomberg',
+    projectGoals:[
+      'Reduce instructional technology access gaps by ensuring faculty at smaller colleges (Cerro Coso and Porterville) have equal opportunity to experiment with and adopt immersive learning tools',
+      'Promote inclusive and equity-focused teaching by equipping faculty with VR-based strategies that foster empathy, cultural understanding, and engagement among diverse student populations',
+      'Increase faculty confidence and cross-disciplinary use of VR-based teaching methods at all three Kern CCD colleges',
+      'Address a critical gap in Kern CCD\u2019s 2024–2027 EEO Plan by adding post-hire professional development and retention strategies'
+    ]
   }
 ];
 
@@ -756,7 +774,7 @@ const translations = {
     nav_overview:'Overview', nav_funds:'Budget Allocation', nav_districts:'Districts',
     nav_outcomes:'Outcomes', nav_budget:'Budget Breakdown', nav_timeline:'Timeline', nav_contacts:'Contacts', nav_spenddown:'Spend-Down Monitor',
     topbar_title:'EEO Data Intelligence',
-    overview_title:'Program Overview', overview_sub:'Project view for Kern Community College District — a Tier 1 grantee of the 2026–2028 EEO Innovative Best Practices initiative. Tracking the VR Faculty Development & Peer Mentoring Program.',
+    overview_title:'Program Overview', overview_sub:'Kern CCD — VR EEO Faculty Development and Peer Mentoring Program. Tier 1 ($150,000), 2026–2028 EEO IBP grant. Submitted by Bobby Becka on Jul 31, 2025.',
     meta_monitor:'Grant Monitor', meta_grantid:'Grant ID', meta_start:'Start', meta_duration:'Funding Cycle', meta_status:'Status',
     kpi_total_funding:'Total Grant Funding', kpi_across:'VR Faculty Development & Peer Mentoring',
     kpi_total_districts:'Total Districts', kpi_all_submitted:'All submitted',
