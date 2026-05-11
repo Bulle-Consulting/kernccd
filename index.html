@@ -523,11 +523,11 @@
         </div>
 
         <div class="kpi-grid">
-          <div class="kpi-card"><div class="kpi-accent-bar blue"></div><div class="kpi-label" data-i18n="kpi_total_funding">Total Grant Funding</div><div class="kpi-value blue">$150,000</div><div class="kpi-sub" data-i18n="kpi_across">VR Faculty Development & Peer Mentoring</div></div>
-          <div class="kpi-card"><div class="kpi-accent-bar medium-blue"></div><div class="kpi-label" data-i18n="kpi_total_districts">Total Districts</div><div class="kpi-value medium-blue">11</div><div class="kpi-sub" data-i18n="kpi_all_submitted">All submitted</div></div>
-          <div class="kpi-card"><div class="kpi-accent-bar blue"></div><div class="kpi-label" data-i18n="kpi_tier1">Tier 1 Districts</div><div class="kpi-value blue">7</div><div class="kpi-sub" data-i18n="kpi_tier1_sub">$150K each (avg)</div></div>
-          <div class="kpi-card"><div class="kpi-accent-bar medium-blue"></div><div class="kpi-label" data-i18n="kpi_tier2">Tier 2 Districts</div><div class="kpi-value-wrap"><span class="lift-mark lift-mark-value" title="LIFT Alliance">LIFT</span><div class="kpi-value medium-blue">4</div></div><div class="kpi-sub" data-i18n="kpi_tier2_sub">$100K each</div></div>
-          <div class="kpi-card"><div class="kpi-accent-bar grey"></div><div class="kpi-label" data-i18n="kpi_focus">Focus Areas</div><div class="kpi-value grey">8</div><div class="kpi-sub" data-i18n="kpi_focus_sub">Mentorship · Training · Hiring · Tech</div></div>
+          <div class="kpi-card"><div class="kpi-accent-bar blue"></div><div class="kpi-label" data-i18n="kpi_total_funding">Total Grant Funding</div><div class="kpi-value blue">$150,000</div><div class="kpi-sub" data-i18n="kpi_across">VR Faculty Development &amp; Peer Mentoring</div></div>
+          <div class="kpi-card"><div class="kpi-accent-bar medium-blue"></div><div class="kpi-label" data-i18n="kpi_grant_tier">Grant Tier</div><div class="kpi-value medium-blue">Tier 1</div><div class="kpi-sub" data-i18n="kpi_grant_tier_sub">2026&ndash;2028 EEO IBP</div></div>
+          <div class="kpi-card"><div class="kpi-accent-bar blue"></div><div class="kpi-label" data-i18n="kpi_colleges">Participating Colleges</div><div class="kpi-value blue">3</div><div class="kpi-sub" data-i18n="kpi_colleges_sub">Bakersfield &middot; Cerro Coso &middot; Porterville</div></div>
+          <div class="kpi-card"><div class="kpi-accent-bar medium-blue"></div><div class="kpi-label" data-i18n="kpi_faculty_target">Faculty Target</div><div class="kpi-value medium-blue">&ge; 30</div><div class="kpi-sub" data-i18n="kpi_faculty_target_sub">Trained across the district by Year 2</div></div>
+          <div class="kpi-card"><div class="kpi-accent-bar grey"></div><div class="kpi-label" data-i18n="kpi_focus">Focus Areas</div><div class="kpi-value grey">4</div><div class="kpi-sub" data-i18n="kpi_focus_sub">VR &middot; Faculty Dev &middot; Peer Mentoring &middot; Inclusive Pedagogy</div></div>
         </div>
 
         <div class="alliance-banner">
@@ -780,7 +780,7 @@ const translations = {
     kpi_total_districts:'Total Districts', kpi_all_submitted:'All submitted',
     kpi_tier1:'Tier 1 Districts', kpi_tier1_sub:'$150K each (avg)',
     kpi_tier2:'Tier 2 Districts', kpi_tier2_sub:'$100K each',
-    kpi_lift:'LIFT Alliance', kpi_focus:'Focus Areas', kpi_focus_sub:'Mentorship · Training · Hiring · Tech',
+    kpi_lift:'LIFT Alliance', kpi_focus:'Focus Areas', kpi_focus_sub:'VR · Faculty Dev · Peer Mentoring · Inclusive Pedagogy',
     lift_title:'LIFT Alliance — Leadership Institute for Tomorrow',
     lift_desc:'Four of the Kern CCD — Antelope Valley CCD (Region 6), Citrus CCD (Region 8), Peralta CCD (Region 3), and West Valley-Mission CCD (Region 4) — are members of an unprecedented 10-college-10-region statewide alliance, implementing a shared Mentor & Match Professional Platform across California Community Colleges.',
     chart_tier_dist:'Fund Allocation by Tier', chart_total_dist:'Total Distribution',
@@ -859,11 +859,11 @@ const translations = {
     topbar_title:'Proyecto Kern CCD',
     overview_title:'Resumen del Programa', overview_sub:'Una visión estatal de la iniciativa de Subvención de Mejores Prácticas Innovadoras de Igualdad de Oportunidades de Empleo (EEO), que abarca 11 distritos de colegios comunitarios de California.',
     meta_monitor:'Monitor de Subvención', meta_grantid:'ID de Subvención', meta_start:'Inicio', meta_duration:'Ciclo de Financiamiento', meta_status:'Estado',
-    kpi_total_funding:'Financiamiento Total', kpi_across:'En 11 distritos',
+    kpi_total_funding:'Financiamiento Total', kpi_across:'Desarrollo Docente y Mentoría con RV',
     kpi_total_districts:'Total Distritos', kpi_all_submitted:'Todos enviados',
     kpi_tier1:'Distritos Nivel 1', kpi_tier1_sub:'$150K cada uno (promedio)',
     kpi_tier2:'Distritos Nivel 2', kpi_tier2_sub:'$100K cada uno',
-    kpi_lift:'Alianza LIFT', kpi_focus:'Áreas de Enfoque', kpi_focus_sub:'Mentoría · Capacitación · Contratación · Tecnología',
+    kpi_lift:'Alianza LIFT', kpi_focus:'Áreas de Enfoque', kpi_focus_sub:'RV · Desarrollo Docente · Mentoría · Pedagogía Inclusiva',
     lift_title:'Alianza LIFT — Instituto de Liderazgo para el Mañana',
     lift_desc:'Cuatro de los 11 distritos son miembros de una alianza estatal sin precedentes de 10 colegios y 10 regiones.',
     chart_tier_dist:'Asignación por Nivel', chart_total_dist:'Distribución Total',
@@ -936,17 +936,23 @@ const translations = {
     status_active:'Activo',
     y1_window_short:'Ene 2026 – Jun 2027',
     y2_window_short:'Jul 2027 – Jun 2028'
-  },
+  
+    kpi_grant_tier:'Nivel de Subvención',
+    kpi_grant_tier_sub:'EEO IBP 2026–2028',
+    kpi_colleges:'Colegios Participantes',
+    kpi_colleges_sub:'Bakersfield · Cerro Coso · Porterville',
+    kpi_faculty_target:'Meta de Docentes',
+    kpi_faculty_target_sub:'Capacitados en el distrito al Año 2',},
   vi: {
     nav_overview:'Tổng quan', nav_funds:'Phân bổ vốn', nav_districts:'Quận', nav_outcomes:'Kết quả', nav_budget:'Ngân sách', nav_timeline:'Lịch trình', nav_contacts:'Liên lạc', nav_spenddown:'Theo dõi Chi tiêu',
     topbar_title:'Dự án Kern CCD',
     overview_title:'Tổng quan Chương trình', overview_sub:'Tổng quan toàn tiểu bang về sáng kiến Tài trợ Thực hành Sáng tạo Tốt nhất về Cơ hội Bình đẳng trong Việc làm (EEO), bao gồm 11 quận trường cao đẳng cộng đồng California.',
     meta_monitor:'Người giám sát', meta_grantid:'Mã tài trợ', meta_start:'Bắt đầu', meta_duration:'Chu kỳ tài trợ', meta_status:'Trạng thái',
-    kpi_total_funding:'Tổng tài trợ', kpi_across:'Trên 11 quận',
+    kpi_total_funding:'Tổng tài trợ', kpi_across:'Phát triển GV bằng VR & Cố vấn đồng nghiệp',
     kpi_total_districts:'Tổng số quận', kpi_all_submitted:'Tất cả đã nộp',
     kpi_tier1:'Quận Cấp 1', kpi_tier1_sub:'$150K mỗi quận',
     kpi_tier2:'Quận Cấp 2', kpi_tier2_sub:'$100K mỗi quận',
-    kpi_lift:'Liên minh LIFT', kpi_focus:'Lĩnh vực trọng tâm', kpi_focus_sub:'Cố vấn · Đào tạo · Tuyển dụng · Công nghệ',
+    kpi_lift:'Liên minh LIFT', kpi_focus:'Trọng Tâm', kpi_focus_sub:'VR · Phát triển GV · Cố vấn đồng nghiệp · Sư phạm bao gồm',
     lift_title:'Liên minh LIFT — Viện Lãnh đạo cho Tương lai',
     lift_desc:'Bốn trong số 11 quận là thành viên của liên minh 10 trường cao đẳng-10 khu vực toàn tiểu bang.',
     chart_tier_dist:'Phân bổ theo cấp', chart_total_dist:'Tổng phân phối',
@@ -1019,17 +1025,23 @@ const translations = {
     status_active:'Đang hoạt động',
     y1_window_short:'Th1 2026 – Th6 2027',
     y2_window_short:'Th7 2027 – Th6 2028'
-  },
+  
+    kpi_grant_tier:'Hạng Tài Trợ',
+    kpi_grant_tier_sub:'EEO IBP 2026–2028',
+    kpi_colleges:'Các Trường Tham Gia',
+    kpi_colleges_sub:'Bakersfield · Cerro Coso · Porterville',
+    kpi_faculty_target:'Mục Tiêu Giảng Viên',
+    kpi_faculty_target_sub:'Đào tạo trên toàn quận đến Năm 2',},
   ar: {
     nav_overview:'نظرة عامة', nav_funds:'التخصيصات', nav_districts:'المقاطعات', nav_outcomes:'النتائج', nav_budget:'الميزانية', nav_timeline:'الجدول الزمني', nav_contacts:'جهات الاتصال', nav_spenddown:'مراقب الإنفاق',
     topbar_title:'مشروع Kern CCD',
     overview_title:'نظرة عامة على البرنامج', overview_sub:'نظرة عامة على مستوى الولاية لمبادرة منحة الممارسات المبتكرة الأفضل لتكافؤ فرص العمل (EEO)، تشمل 11 مقاطعة كليات مجتمعية في كاليفورنيا.',
     meta_monitor:'مراقب المنحة', meta_grantid:'معرّف المنحة', meta_start:'البداية', meta_duration:'دورة التمويل', meta_status:'الحالة',
-    kpi_total_funding:'إجمالي التمويل', kpi_across:'عبر 11 مقاطعة',
+    kpi_total_funding:'إجمالي التمويل', kpi_across:'تطوير أعضاء هيئة التدريس بـ VR والإرشاد',
     kpi_total_districts:'إجمالي المقاطعات', kpi_all_submitted:'جميعها مُقدَّمة',
     kpi_tier1:'مقاطعات الفئة 1', kpi_tier1_sub:'$150K لكل منها',
     kpi_tier2:'مقاطعات الفئة 2', kpi_tier2_sub:'$100K لكل منها',
-    kpi_lift:'تحالف LIFT', kpi_focus:'مجالات التركيز', kpi_focus_sub:'الإرشاد · التدريب · التوظيف · التكنولوجيا',
+    kpi_lift:'تحالف LIFT', kpi_focus:'مجالات التركيز', kpi_focus_sub:'الواقع الافتراضي · تطوير الأساتذة · الإرشاد · التعليم الشامل',
     lift_title:'تحالف LIFT — معهد القيادة من أجل الغد',
     lift_desc:'أربع من بين 11 مقاطعة أعضاء في تحالف ولائي يضم 10 كليات و10 مناطق.',
     chart_tier_dist:'توزيع الأموال حسب الفئة', chart_total_dist:'التوزيع الكلي',
@@ -1102,17 +1114,23 @@ const translations = {
     status_active:'نشط',
     y1_window_short:'يناير 2026 – يونيو 2027',
     y2_window_short:'يوليو 2027 – يونيو 2028'
-  },
+  
+    kpi_grant_tier:'فئة المنحة',
+    kpi_grant_tier_sub:'2026–2028 EEO IBP',
+    kpi_colleges:'الكليات المشاركة',
+    kpi_colleges_sub:'بيكرسفيلد · سيرو كوسو · بورترفيل',
+    kpi_faculty_target:'هدف أعضاء هيئة التدريس',
+    kpi_faculty_target_sub:'تدريب على مستوى المنطقة بنهاية السنة 2',},
   tl: {
     nav_overview:'Pangkalahatang-tanaw', nav_funds:'Pagbibigay-pondo', nav_districts:'Mga Distrito', nav_outcomes:'Mga Resulta', nav_budget:'Badyet', nav_timeline:'Iskedyul', nav_contacts:'Mga Kontak', nav_spenddown:'Spend-Down Monitor',
     topbar_title:'Kern CCD Project',
     overview_title:'Pangkalahatang-tanaw ng Programa', overview_sub:'Isang pangkalahatang-tanaw sa buong estado ng inisyatiba ng Equal Employment Opportunity (EEO) Innovative Best Practices grant, na sumasaklaw sa 11 distrito ng California community college.',
     meta_monitor:'Grant Monitor', meta_grantid:'ID ng Grant', meta_start:'Simula', meta_duration:'Funding Cycle', meta_status:'Katayuan',
-    kpi_total_funding:'Kabuuang Pondo', kpi_across:'Sa 11 distrito',
+    kpi_total_funding:'Kabuuang Pondo', kpi_across:'VR Faculty Development & Peer Mentoring',
     kpi_total_districts:'Kabuuang Distrito', kpi_all_submitted:'Lahat naihain',
     kpi_tier1:'Mga Distrito ng Tier 1', kpi_tier1_sub:'$150K bawat isa',
     kpi_tier2:'Mga Distrito ng Tier 2', kpi_tier2_sub:'$100K bawat isa',
-    kpi_lift:'Alyansa ng LIFT', kpi_focus:'Mga Larangan ng Pokus', kpi_focus_sub:'Mentorship · Pagsasanay · Pagtatrabaho · Tech',
+    kpi_lift:'Alyansa ng LIFT', kpi_focus:'Mga Pokus', kpi_focus_sub:'VR · Faculty Dev · Peer Mentoring · Inclusive Pedagogy',
     lift_title:'Alyansa ng LIFT — Leadership Institute for Tomorrow',
     lift_desc:'Apat sa 11 distrito ang miyembro ng walang kapantay na 10-kolehiyo-10-rehiyon na alyansa.',
     chart_tier_dist:'Paglalaan ng Pondo ayon sa Tier', chart_total_dist:'Kabuuang Pamamahagi',
@@ -1185,18 +1203,24 @@ const translations = {
     status_active:'Aktibo',
     y1_window_short:'Ene 2026 – Hun 2027',
     y2_window_short:'Hul 2027 – Hun 2028'
-  },
+  
+    kpi_grant_tier:'Tier ng Grant',
+    kpi_grant_tier_sub:'2026–2028 EEO IBP',
+    kpi_colleges:'Mga Kalahok na Kolehiyo',
+    kpi_colleges_sub:'Bakersfield · Cerro Coso · Porterville',
+    kpi_faculty_target:'Target na Faculty',
+    kpi_faculty_target_sub:'Sanay sa buong distrito sa Year 2',},
   zh: {
     nav_overview:'總覽', nav_funds:'資金分配', nav_districts:'學區', nav_outcomes:'成果', nav_budget:'預算明細', nav_timeline:'時間表', nav_contacts:'聯絡資訊', nav_spenddown:'支出進度監測',
     topbar_title:'Kern CCD 計畫',
     overview_title:'計畫總覽',
     overview_sub:'本州平等就業機會 (EEO) 創新最佳實踐補助計畫的全州概覽,涵蓋加州 11 個社區大學學區。',
     meta_monitor:'計畫監督', meta_grantid:'補助編號', meta_start:'起始日期', meta_duration:'資助週期', meta_status:'狀態',
-    kpi_total_funding:'補助金總額', kpi_across:'涵蓋 11 個學區',
+    kpi_total_funding:'補助金總額', kpi_across:'VR 教職員發展與同儕輔導',
     kpi_total_districts:'學區總數', kpi_all_submitted:'全部已提交',
     kpi_tier1:'第 1 級學區', kpi_tier1_sub:'平均每區 $150K',
     kpi_tier2:'第 2 級學區', kpi_tier2_sub:'每區 $100K',
-    kpi_lift:'LIFT 聯盟', kpi_focus:'重點領域', kpi_focus_sub:'導師制 · 培訓 · 招聘 · 科技',
+    kpi_lift:'LIFT 聯盟', kpi_focus:'重點領域', kpi_focus_sub:'VR · 教職發展 · 同儕輔導 · 包容教學',
     lift_title:'LIFT 聯盟 — 明日領導力學院',
     lift_desc:'11 個學區中的四個 — Antelope Valley CCD(第 6 區)、Citrus CCD(第 8 區)、Peralta CCD(第 3 區)和 West Valley-Mission CCD(第 4 區)— 是史無前例的 10 校 10 區全州聯盟成員,在加州社區大學系統中實施共享的「導師與配對專業平台」。',
     chart_tier_dist:'按等級的資金分配', chart_total_dist:'總分配',
@@ -1264,7 +1288,13 @@ const translations = {
     status_active:'進行中',
     y1_window_short:'2026年1月–2027年6月',
     y2_window_short:'2027年7月–2028年6月'
-  }
+  
+    kpi_grant_tier:'補助等級',
+    kpi_grant_tier_sub:'2026–2028 EEO IBP',
+    kpi_colleges:'參與學院',
+    kpi_colleges_sub:'貝克斯菲爾德 · 塞羅科索 · 波特維爾',
+    kpi_faculty_target:'教職員目標',
+    kpi_faculty_target_sub:'第二年前完成全區培訓',}
 };
 
 let currentLang = 'en';
@@ -1825,3 +1855,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
+    kpi_grant_tier:'Grant Tier',
+    kpi_grant_tier_sub:'2026–2028 EEO IBP',
+    kpi_colleges:'Participating Colleges',
+    kpi_colleges_sub:'Bakersfield · Cerro Coso · Porterville',
+    kpi_faculty_target:'Faculty Target',
+    kpi_faculty_target_sub:'Trained across the district by Year 2',
