@@ -660,7 +660,7 @@
             <span id="underspend-count" class="risk-badge high" data-i18n="calculating">Calculating...</span>
           </div>
           <div class="card-body">
-            <p style="font-size:12.5px;color:var(--text-muted);margin:0 0 14px;line-height:1.5;" data-i18n="underspend_desc">The project is flagged when Year 1 or Year 2 spend pace is set to Slow, Fast, or Underfunded. Set the pace to Moderate in the table below to clear the flag.</p>
+            <p style="font-size:12.5px;color:var(--text-muted);margin:0 0 14px;line-height:1.5;" data-i18n="underspend_desc">The project is flagged when its spend pace is set to Slow or Fast. Set the pace to Moderate in the table below to clear the flag.</p>
             <div id="underspend-chart-wrap" style="position:relative;height:240px;margin-bottom:14px;display:none;">
               <canvas id="underspendChart"></canvas>
             </div>
@@ -795,7 +795,7 @@ const translations = {
     spend_sub:'Track grant expenditures across the 2-year funding cycle and flag districts at risk of underspending',
     underspend_title:'⚠ Underspend Risk Alerts',
     calculating:'Calculating...',
-    underspend_desc:'Districts get flagged when their Spend Pace is set to Slow, Fast, or Underfunded. Set the pace to Moderate in the table below to clear the flag.',
+    underspend_desc:'Districts get flagged when its spend pace is set to Slow or Fast. Set the pace to Moderate in the table below to clear the flag.',
     spend_table_title:'District Spend-Down Detail',
     spend_table_sub:'Allocations vs. Year-by-Year Spend · 2-Year Cycle',
     th_total_grant:'Total Grant',
@@ -1657,14 +1657,13 @@ const KERN_PERIODS = [
 const periodStatuses = JSON.parse(localStorage.getItem('kernPeriodStatuses') || '{}');
 const periodPaces    = JSON.parse(localStorage.getItem('kernPeriodPaces')    || '{}');
 
-const PACE_CYCLE = ['slow','moderate','fast','underfunded'];
+const PACE_CYCLE = ['slow','moderate','fast'];
 const PACE_COLOR = {
-  slow:        '#E0B500',
-  moderate:    '#1a7a3c',
-  fast:        '#c53030',
-  underfunded: '#D18A00'
+  slow:     '#E0B500',
+  moderate: '#1a7a3c',
+  fast:     '#c53030'
 };
-const PACE_LABEL = { slow:'Slow', moderate:'Moderate', fast:'Fast', underfunded:'Underfunded' };
+const PACE_LABEL = { slow:'Slow', moderate:'Moderate', fast:'Fast' };
 
 function togglePeriodStatus(btn, id) {
   const isNowOff = btn.dataset.on === '1';
