@@ -2519,38 +2519,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   // Announce the initial section once the page settles
   setTimeout(() => postSectionChange(resolveInitialSection()), 100);
-<<<<<<< HEAD
-=======
-
-  // VR avatar — track cursor while hovered so the head looks toward the pointer
-  (function initVrAvatar(){
-    const wrap = document.getElementById('vrAvatarWrap');
-    if (!wrap) return;
-    const head = wrap.querySelector('.vr-head-group');
-    if (!head) return;
-    let raf=0,curRot=0,curTy=0,targetRot=0,targetTy=0,sprActive=false;
-    function onMove(e){
-      const rect = wrap.getBoundingClientRect();
-      const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-      const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-      targetRot=Math.max(-22,Math.min(22,dx*22));
-      const ty  = Math.max(-6,  Math.min(6,  dy * 6));
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        head.style.transform = 'rotate(' + rot.toFixed(1) + 'deg) translateY(' + ty.toFixed(1) + 'px)';
-      });
-    }
-    function onEnter(){ head.style.animationPlayState = 'paused'; }
-    function onLeave(){
-      cancelAnimationFrame(raf);
-      head.style.transform = '';
-      head.style.animationPlayState = '';
-    }
-    wrap.addEventListener('mouseenter', onEnter);
-    wrap.addEventListener('mousemove', onMove);
-    wrap.addEventListener('mouseleave', onLeave);
-  })();
->>>>>>> e2bc4b4cea17cf74db4626924796c5151aaa4048
 });
 </script>
 
