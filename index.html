@@ -963,7 +963,7 @@
                     <rect x="34" y="58" width="72" height="6" rx="3" fill="rgba(255,255,255,0.07)"/>
 
                     <!-- Headset face plate -->
-                    <path d="M38,62 Q38,60 42,60 L68,60 Q72,60 70,64 Q68,76 58,80 Q48,82 40,78 Q36,76 36,70 Z" fill="url(#vrLensGrad)" class="vr-lens-glow"/><path d="M72,62 Q72,60 76,60 L100,60 Q104,60 102,64 Q100,76 90,80 Q80,82 72,78 Q68,76 70,70 Z" fill="url(#vrLensGrad)" class="vr-lens-glow"/><ellipse cx="50" cy="64" rx="7" ry="3.5" fill="rgba(255,255,255,0.20)"/><ellipse cx="84" cy="64" rx="7" ry="3.5" fill="rgba(255,255,255,0.20)"/><circle cx="70" cy="91" r="2" fill="#00DFFF" opacity="0.85"/>
+                    <rect x="36" y="62" width="68" height="20" rx="5" fill="#0A1525"/>
 
                     <!-- Lens housings -->
                     <ellipse class="vr-lens-glow" cx="55" cy="72" rx="11" ry="7" fill="url(#vrLensGrad)"/>
@@ -1261,12 +1261,6 @@ const districts = [
     budgetHighlights:{'Instructional Salaries (1000)':32660,'Employee Benefits (3000)':7074,'Supplies and Materials (4000)':90750,'Other Operating Expenses and Services (5000)':12020,'Indirect Costs (7000)':7496},
     yearlyBudget:{y1:122638,y2:27362},
     fiscalYearBudget:{'2025-26':50735,'2026-27':71903,'2027-28':27362},
-    projectContacts:[
-      {name:'Bobby Becka',title:'',role:'Project Lead Contact',email:'bobby.becka@kccd.edu',phone:'(661) 395-4102'},
-      {name:'Dr. Bonita Steele',title:'',role:'Alternate Project Lead Contact',email:'bsteele@kccd.edu',phone:'(661) 336-5046'},
-      {name:'Cathi Jacob',title:'',role:'Institution Project Fiscal Reporter',email:'cjacob@kccd.edu',phone:'(661) 336-5105'},
-      {name:'Melissa Thornsberry',title:'',role:'Plan Approver',email:'melissa.thornsberry@kccd.edu',phone:'(661) 336-5142'}
-    ],
     primaryFocus:'VR Faculty Development & Peer Mentoring',
     leadAddress:'2100 Chester Avenue, Bakersfield, CA 93301',
     website:'https://www.kccd.edu/',
@@ -2115,34 +2109,29 @@ function translateRole(r) { return ROLE_KEYS[r] ? t(ROLE_KEYS[r]) : r; }
 function renderContacts() {
   const grid = document.getElementById('contacts-grid');
   if (!grid) return;
-  const mailIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
-  const phoneIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
-  const people = (districts[0] && districts[0].projectContacts) || [];
-  grid.innerHTML = people.map(p => {
-    const initials = p.name.replace(/[",.]/g,'').split(/\s+/).filter(w => w.length > 1 && /^[A-Z]/.test(w)).slice(0,2).map(w => w[0]).join('');
-    const roleBadge = p.role ? `<div class="contact-card-role">${translateRole(p.role)}</div>` : '';
+  grid.innerHTML = districts.map(d => {
+    const people = [d.contact, d.altContact, d.fiscalReporter, d.planApprover].filter(Boolean);
+    const tierLabel = d.lift ? `${t('kpi_lift')} · ${d.liftRegion}` : `${t('th_tier')} ${d.tier}`;
     return `
-      <article class="contact-card">
-        <div class="contact-photo">
-          <div class="contact-photo-initials">${initials || p.name[0]}</div>
-          ${p.photo ? `<img src="${p.photo}" alt="${p.name}" onerror="this.style.visibility='hidden'" />` : ''}
+      <div class="contact-card">
+        <div class="contact-card-header">
+          <div class="contact-card-district">${d.name}</div>
+          <div class="contact-card-region">${tierLabel}</div>
+          <div class="contact-card-address">${d.address || ''}</div>
         </div>
-        <div class="contact-card-body">
-          <h3 class="contact-card-name">${p.name}</h3>
-          ${p.title ? `<div class="contact-card-title">${p.title}</div>` : ''}
-          ${roleBadge}
-          <div class="contact-card-divider"></div>
-          <div class="contact-card-links">
-            <a class="contact-card-link" href="mailto:${p.email}" title="${p.email}">${mailIcon}<span>${p.email}</span></a>
-            ${p.phone ? (() => {
-              const m = p.phone.match(/^(.+?)(\s*(?:ext\.?|x)\s*\d+)$/i);
-              const main = m ? m[1].trim() : p.phone;
-              const ext = m ? m[2].trim() : '';
-              return `<div class="contact-card-phone-row"><a class="contact-card-link" href="tel:${main.replace(/[^0-9+]/g,'')}" title="${main}">${phoneIcon}<span>${main}</span></a>${ext ? `<span class="contact-card-ext">${ext}</span>` : ''}</div>`;
-            })() : ''}
-          </div>
+        <div class="contact-body">
+          ${people.map(p => `
+            <div class="contact-person">
+              <div class="contact-avatar">${p.name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase()}</div>
+              <div class="contact-info">
+                <div class="contact-name">${p.name}</div>
+                <div class="contact-role">${translateRole(p.role)}</div>
+                <a class="contact-email" href="mailto:${p.email}">${p.email}</a>
+                ${p.phone ? `<a class="contact-phone" href="tel:${p.phone.replace(/[^0-9+]/g,'')}">${p.phone}</a>` : ''}
+              </div>
+            </div>`).join('')}
         </div>
-      </article>`;
+      </div>`;
   }).join('');
 }
 
@@ -2552,12 +2541,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!wrap) return;
     const head = wrap.querySelector('.vr-head-group');
     if (!head) return;
-    let raf=0,curRot=0,curTy=0,targetRot=0,targetTy=0,sprActive=false;
+    let raf = 0;
     function onMove(e){
       const rect = wrap.getBoundingClientRect();
       const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
       const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-      targetRot=Math.max(-22,Math.min(22,dx*22));
+      const rot = Math.max(-22, Math.min(22, dx * 22));
       const ty  = Math.max(-6,  Math.min(6,  dy * 6));
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
