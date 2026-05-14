@@ -963,7 +963,7 @@
                     <rect x="34" y="58" width="72" height="6" rx="3" fill="rgba(255,255,255,0.07)"/>
 
                     <!-- Headset face plate -->
-                    <rect x="36" y="62" width="68" height="20" rx="5" fill="#0A1525"/>
+                    <path d="M38,62 Q38,60 42,60 L68,60 Q72,60 70,64 Q68,76 58,80 Q48,82 40,78 Q36,76 36,70 Z" fill="url(#vrLensGrad)" class="vr-lens-glow"/><path d="M72,62 Q72,60 76,60 L100,60 Q104,60 102,64 Q100,76 90,80 Q80,82 72,78 Q68,76 70,70 Z" fill="url(#vrLensGrad)" class="vr-lens-glow"/><ellipse cx="50" cy="64" rx="7" ry="3.5" fill="rgba(255,255,255,0.20)"/><ellipse cx="84" cy="64" rx="7" ry="3.5" fill="rgba(255,255,255,0.20)"/><circle cx="70" cy="91" r="2" fill="#00DFFF" opacity="0.85"/>
 
                     <!-- Lens housings -->
                     <ellipse class="vr-lens-glow" cx="55" cy="72" rx="11" ry="7" fill="url(#vrLensGrad)"/>
@@ -2552,12 +2552,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!wrap) return;
     const head = wrap.querySelector('.vr-head-group');
     if (!head) return;
-    let raf = 0;
+    let raf=0,curRot=0,curTy=0,targetRot=0,targetTy=0,sprActive=false;
     function onMove(e){
       const rect = wrap.getBoundingClientRect();
       const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
       const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-      const rot = Math.max(-22, Math.min(22, dx * 22));
+      targetRot=Math.max(-22,Math.min(22,dx*22));
       const ty  = Math.max(-6,  Math.min(6,  dy * 6));
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
