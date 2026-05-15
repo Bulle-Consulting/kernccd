@@ -504,10 +504,11 @@
     /* Overview hero card — wraps title + ticker on dark slate */
     .overview-hero { background:var(--bg-surface); border-radius:var(--radius-lg); padding:18px 26px 18px; margin-bottom:24px; box-shadow:var(--shadow-sm); border:1px solid var(--border); border-left:3px solid var(--kccd-red); position:relative; }
     .overview-hero-text { position:relative; }
-    .overview-hero-text h2 { padding-right:76px; }
-    .overview-hero-avatar { position:absolute; right:6px; top:50%; transform:translateY(-50%); width:64px; height:64px; pointer-events:none; perspective:600px; }
+    .overview-hero-text h2 { padding-right:64px; }
+    .overview-hero-text .overview-ticker { padding-right:60px; }
+    .overview-hero-avatar { position:absolute; right:6px; top:4px; width:54px; height:54px; pointer-events:none; perspective:560px; }
     .overview-hero-avatar .vr-woman { width:100%; height:100%; overflow:visible; display:block; }
-    @media (max-width:560px) { .overview-hero { padding:16px 18px 14px; } .overview-hero-text h2 { padding-right:62px; } .overview-hero-avatar { width:52px; height:52px; right:4px; } }
+    @media (max-width:560px) { .overview-hero { padding:16px 18px 14px; } .overview-hero-text h2 { padding-right:52px; } .overview-hero-text .overview-ticker { padding-right:48px; } .overview-hero-avatar { width:44px; height:44px; right:4px; top:4px; } }
     .overview-hero h2 { font-family:var(--font-display); font-size:26px; font-weight:600; color:var(--text-primary); line-height:1.2; margin:0; letter-spacing:-0.02em; }
     .overview-hero .overview-ticker { margin-top:12px; }
     [data-theme="dark"] .overview-hero { background:var(--bg-card); border-left-color:var(--kccd-red); }
