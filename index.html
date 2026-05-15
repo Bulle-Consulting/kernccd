@@ -497,10 +497,11 @@
     @media (max-width:760px) { .kccd-topbar-stamp { padding:4px 10px; height:34px; } .kccd-topbar-stamp img { height:18px; } } @media (max-width:520px) { .kccd-topbar-stamp { display:none; } }
 
     /* Overview hero card — wraps title + ticker on dark slate */
-    .overview-hero { background:var(--bg-surface); border-radius:var(--radius-lg); padding:20px 26px 16px; margin-bottom:24px; box-shadow:var(--shadow-sm); border:1px solid var(--border); border-left:3px solid var(--kccd-red); display:flex; align-items:center; gap:18px; }
-    .overview-hero-text { flex:1; min-width:0; }
-    .overview-hero-avatar { width:110px; height:110px; flex-shrink:0; }
-    @media (max-width:560px) { .overview-hero { flex-direction:column; align-items:flex-start; } .overview-hero-avatar { width:88px; height:88px; align-self:flex-end; } }
+    .overview-hero { background:var(--bg-surface); border-radius:var(--radius-lg); padding:18px 26px 18px; margin-bottom:24px; box-shadow:var(--shadow-sm); border:1px solid var(--border); border-left:3px solid var(--kccd-red); position:relative; }
+    .overview-hero-text { position:relative; padding-top:96px; }
+    .overview-hero-avatar { position:absolute; left:0; top:0; width:120px; height:120px; pointer-events:none; }
+    .overview-hero-avatar .vr-woman { width:100%; height:100%; overflow:visible; }
+    @media (max-width:560px) { .overview-hero { padding:16px 18px 14px; } .overview-hero-text { padding-top:88px; } .overview-hero-avatar { width:100px; height:100px; } }
     .overview-hero h2 { font-family:var(--font-display); font-size:26px; font-weight:600; color:var(--text-primary); line-height:1.2; margin:0; letter-spacing:-0.02em; }
     .overview-hero .overview-ticker { margin-top:12px; }
     [data-theme="dark"] .overview-hero { background:var(--bg-card); border-left-color:var(--kccd-red); }
@@ -593,55 +594,76 @@
     html[data-a11y-spacing="on"] body { line-height:1.85; letter-spacing:0.02em; word-spacing:0.06em; }
     html[data-a11y-guide="on"] .a11y-reading-guide { display:block; }
     .a11y-reading-guide { position:fixed; left:0; right:0; height:34px; background:rgba(255,221,0,0.20); border-top:1px solid rgba(255,180,0,0.5); border-bottom:1px solid rgba(255,180,0,0.5); pointer-events:none; z-index:998; display:none; }
-
-    /* Program Overview avatar — woman in VR: touches headset, looks around, claps */
+    /* Program Overview avatar — woman in VR looks around, walks to the heading, and points */
     .vr-woman { display:block; width:100%; height:100%; overflow:visible; }
-    .vr-woman .vrw-head { transform-origin:100px 78px; animation:vrw-head 12s ease-in-out infinite; }
-    .vr-woman .vrw-arm-left { transform-origin:67px 118px; animation:vrw-arm-left 12s ease-in-out infinite; }
-    .vr-woman .vrw-arm-right { transform-origin:133px 118px; animation:vrw-arm-right 12s ease-in-out infinite; }
-    .vr-woman .vrw-mouth { animation:vrw-mouth 12s ease-in-out infinite; transform-origin:100px 86px; }
-    @keyframes vrw-head {
-      0%, 18% { transform:rotate(0deg); }
-      26% { transform:rotate(14deg); }         /* look right */
-      42% { transform:rotate(-14deg); }        /* look left */
-      55%, 100% { transform:rotate(0deg); }    /* look forward, hold */
+    .vr-woman .vrw-figure  { transform-origin:100px 184px; animation:vrw-walk 14s linear infinite; }
+    .vr-woman .vrw-head    { transform-origin:100px 80px;  animation:vrw-head-look 14s ease-in-out infinite; }
+    .vr-woman .vrw-leg-back  { transform-origin:96.5px 146px; animation:vrw-leg-back 14s ease-in-out infinite; }
+    .vr-woman .vrw-leg-front { transform-origin:106.5px 146px; animation:vrw-leg-front 14s ease-in-out infinite; }
+    .vr-woman .vrw-arm-left  { transform-origin:66.5px 118px; animation:vrw-arm-left 14s ease-in-out infinite; }
+    .vr-woman .vrw-arm-right { transform-origin:133.5px 118px; animation:vrw-arm-right 14s ease-in-out infinite; }
+    .vr-woman .vrw-shadow    { animation:vrw-shadow 14s linear infinite; }
+    /* Walk phase: figure translates rightward toward the title; bobs slightly */
+    @keyframes vrw-walk {
+      0%, 38%   { transform:translateX(0)   translateY(0); }
+      45%       { transform:translateX(14px) translateY(-1px); }
+      52%       { transform:translateX(28px) translateY(0); }
+      58%       { transform:translateX(40px) translateY(-1px); }
+      65%       { transform:translateX(52px) translateY(0); }
+      100%      { transform:translateX(52px) translateY(0); }
     }
+    /* Head: looks right, then left, then forward, then keeps forward through walk + point */
+    @keyframes vrw-head-look {
+      0%, 5%   { transform:rotate(0deg); }
+      18%      { transform:rotate(16deg); }     /* look right */
+      30%      { transform:rotate(-16deg); }    /* look left */
+      40%, 100% { transform:rotate(0deg); }     /* look forward, hold */
+    }
+    /* Leg cadence — only active during the walk phase (40%→65%); off otherwise */
+    @keyframes vrw-leg-back {
+      0%, 38% { transform:translateX(0); }
+      44%     { transform:translateX(-4px) translateY(-1px); }
+      50%     { transform:translateX(2px); }
+      56%     { transform:translateX(-4px) translateY(-1px); }
+      62%     { transform:translateX(2px); }
+      65%, 100% { transform:translateX(0); }
+    }
+    @keyframes vrw-leg-front {
+      0%, 38% { transform:translateX(0); }
+      44%     { transform:translateX(4px); }
+      50%     { transform:translateX(-2px) translateY(-1px); }
+      56%     { transform:translateX(4px); }
+      62%     { transform:translateX(-2px) translateY(-1px); }
+      65%, 100% { transform:translateX(0); }
+    }
+    /* Left arm — relaxed during look phase, then raises to point at the heading at 70%→90% */
     @keyframes vrw-arm-left {
-      0% { transform:rotate(0deg); }
-      8% { transform:rotate(-72deg) translate(8px,-6px); }       /* reach up to touch headset */
-      18% { transform:rotate(-72deg) translate(8px,-6px); }      /* hold the touch */
-      24% { transform:rotate(0deg); }                            /* back down */
-      55% { transform:rotate(0deg); }
-      62% { transform:rotate(-22deg) translate(18px,-18px); }    /* clap position A */
-      66% { transform:rotate(-22deg) translate(28px,-18px); }    /* clap toward middle */
-      70% { transform:rotate(-22deg) translate(18px,-18px); }
-      74% { transform:rotate(-22deg) translate(28px,-18px); }
-      78% { transform:rotate(-22deg) translate(18px,-18px); }
-      82% { transform:rotate(-22deg) translate(28px,-18px); }
-      88%, 100% { transform:rotate(0deg); }
+      0%, 65% { transform:rotate(0deg); }
+      72%     { transform:rotate(-95deg) translate(-2px,-26px); }    /* arm up, hand near heading */
+      78%     { transform:rotate(-95deg) translate(-2px,-26px); }
+      88%     { transform:rotate(-95deg) translate(-2px,-26px); }
+      95%, 100% { transform:rotate(0deg); }
     }
+    /* Right arm — swings naturally during walk */
     @keyframes vrw-arm-right {
-      0% { transform:rotate(0deg); }
-      8% { transform:rotate(72deg) translate(-8px,-6px); }
-      18% { transform:rotate(72deg) translate(-8px,-6px); }
-      24% { transform:rotate(0deg); }
-      55% { transform:rotate(0deg); }
-      62% { transform:rotate(22deg) translate(-18px,-18px); }
-      66% { transform:rotate(22deg) translate(-28px,-18px); }
-      70% { transform:rotate(22deg) translate(-18px,-18px); }
-      74% { transform:rotate(22deg) translate(-28px,-18px); }
-      78% { transform:rotate(22deg) translate(-18px,-18px); }
-      82% { transform:rotate(22deg) translate(-28px,-18px); }
-      88%, 100% { transform:rotate(0deg); }
+      0%, 38% { transform:rotate(0deg); }
+      44%     { transform:rotate(14deg); }
+      52%     { transform:rotate(-12deg); }
+      60%     { transform:rotate(14deg); }
+      65%, 100% { transform:rotate(0deg); }
     }
-    @keyframes vrw-mouth {
-      0%, 60% { transform:scaleY(1); }
-      63%, 68%, 73%, 78%, 83% { transform:scaleY(1.4); }
-      65%, 70%, 75%, 80%, 85% { transform:scaleY(1); }
-      88%, 100% { transform:scaleY(1); }
+    /* Ground shadow scales subtly with steps */
+    @keyframes vrw-shadow {
+      0%, 38% { transform:translateX(0) scale(1); opacity:0.18; }
+      44%     { transform:translateX(14px) scale(0.94); opacity:0.16; }
+      52%     { transform:translateX(28px) scale(1.02); opacity:0.18; }
+      58%     { transform:translateX(40px) scale(0.94); opacity:0.16; }
+      65%     { transform:translateX(52px) scale(1.02); opacity:0.18; }
+      100%    { transform:translateX(52px) scale(1); opacity:0.18; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .vr-woman .vrw-head, .vr-woman .vrw-arm-left, .vr-woman .vrw-arm-right, .vr-woman .vrw-mouth { animation:none; }
+      .vr-woman .vrw-figure, .vr-woman .vrw-head, .vr-woman .vrw-leg-back, .vr-woman .vrw-leg-front,
+      .vr-woman .vrw-arm-left, .vr-woman .vrw-arm-right, .vr-woman .vrw-shadow { animation:none; }
     }
   </style>
 </head>
@@ -759,84 +781,122 @@
               </div>
             </div>
           </div>
-          <div class="overview-hero-avatar" role="img" aria-label="Animated avatar of a woman trying on a VR headset, looking around, and clapping">
+          <div class="overview-hero-avatar" role="img" aria-label="Animated avatar wearing a VR headset, looks around, walks toward the Program Overview heading, and points at it">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="vr-woman">
               <defs>
-                <radialGradient id="vrwSkin" cx="42%" cy="32%" r="70%">
-                  <stop offset="0%" stop-color="#fae0c8"/>
-                  <stop offset="55%" stop-color="#e8c4a0"/>
-                  <stop offset="100%" stop-color="#b88560"/>
+                <radialGradient id="vrwFace" cx="42%" cy="32%" r="70%">
+                  <stop offset="0%" stop-color="#fbe2c5"/>
+                  <stop offset="50%" stop-color="#ebc4a1"/>
+                  <stop offset="100%" stop-color="#a87a55"/>
                 </radialGradient>
-                <linearGradient id="vrwHair" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#3b2818"/>
-                  <stop offset="100%" stop-color="#1a0e08"/>
+                <linearGradient id="vrwHair2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3d2818"/>
+                  <stop offset="100%" stop-color="#180c06"/>
                 </linearGradient>
-                <linearGradient id="vrwShirt" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="vrwTop" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stop-color="#357CAC"/>
-                  <stop offset="100%" stop-color="#22587a"/>
+                  <stop offset="100%" stop-color="#1c4a6d"/>
                 </linearGradient>
-                <linearGradient id="vrwHeadset" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#2b2b2e"/>
-                  <stop offset="100%" stop-color="#0a0a0c"/>
+                <linearGradient id="vrwPants" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#23344c"/>
+                  <stop offset="100%" stop-color="#11192a"/>
                 </linearGradient>
-                <radialGradient id="vrwLens" cx="40%" cy="35%" r="70%">
-                  <stop offset="0%" stop-color="#9adcff"/>
-                  <stop offset="55%" stop-color="#1879d4"/>
-                  <stop offset="100%" stop-color="#062a5a"/>
+                <linearGradient id="vrwHs" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#34343a"/>
+                  <stop offset="55%" stop-color="#161618"/>
+                  <stop offset="100%" stop-color="#06060a"/>
+                </linearGradient>
+                <radialGradient id="vrwLens2" cx="38%" cy="32%" r="68%">
+                  <stop offset="0%" stop-color="#bce6ff"/>
+                  <stop offset="35%" stop-color="#3aa1ef"/>
+                  <stop offset="75%" stop-color="#0c4a8f"/>
+                  <stop offset="100%" stop-color="#02132a"/>
                 </radialGradient>
+                <filter id="vrwSoftShade" x="-10%" y="-10%" width="120%" height="120%">
+                  <feGaussianBlur stdDeviation="0.5"/>
+                </filter>
               </defs>
-              <!-- Standing body -->
-              <g class="vrw-body">
-                <!-- Legs -->
-                <rect x="88" y="148" width="10" height="36" rx="3" fill="#22354f"/>
-                <rect x="102" y="148" width="10" height="36" rx="3" fill="#22354f"/>
-                <!-- Torso / shirt -->
-                <path d="M68,118 Q70,108 80,104 L120,104 Q130,108 132,118 L130,152 Q100,158 70,152 Z" fill="url(#vrwShirt)"/>
+
+              <!-- WHOLE-BODY GROUP — walks toward the title -->
+              <g class="vrw-figure">
+
+                <!-- Shadow under foot -->
+                <ellipse class="vrw-shadow" cx="100" cy="186" rx="22" ry="3.5" fill="#000" opacity="0.18"/>
+
+                <!-- Legs (alternate while walking) -->
+                <g class="vrw-leg vrw-leg-back">
+                  <rect x="92" y="146" width="9" height="36" rx="3.5" fill="url(#vrwPants)"/>
+                  <ellipse cx="96" cy="184" rx="6" ry="2.5" fill="#0a0e15"/>
+                </g>
+                <g class="vrw-leg vrw-leg-front">
+                  <rect x="102" y="146" width="9" height="36" rx="3.5" fill="url(#vrwPants)"/>
+                  <ellipse cx="106" cy="184" rx="6" ry="2.5" fill="#0a0e15"/>
+                </g>
+
+                <!-- Torso -->
+                <path d="M70,118 Q72,108 82,104 L122,104 Q132,108 134,118 L132,148 Q100,154 68,148 Z" fill="url(#vrwTop)" filter="url(#vrwSoftShade)"/>
+                <!-- Shirt collar shadow -->
+                <path d="M82,104 Q92,108 100,108 Q108,108 118,104" stroke="rgba(0,0,0,0.25)" stroke-width="1" fill="none"/>
+
                 <!-- Neck -->
-                <rect x="92" y="96" width="16" height="14" fill="url(#vrwSkin)"/>
+                <rect x="92" y="92" width="16" height="16" fill="url(#vrwFace)"/>
+                <path d="M92,100 Q100,104 108,100" stroke="rgba(0,0,0,0.18)" stroke-width="1" fill="none"/>
+
                 <!-- Hair back -->
-                <ellipse cx="100" cy="62" rx="34" ry="32" fill="url(#vrwHair)"/>
-                <!-- Hair shoulder -->
-                <path d="M68,80 Q60,108 70,120 L82,116 Q78,100 80,80 Z" fill="url(#vrwHair)"/>
-                <path d="M132,80 Q140,108 130,120 L118,116 Q122,100 120,80 Z" fill="url(#vrwHair)"/>
-                <!-- Head group (rotates left/right) -->
+                <ellipse cx="100" cy="60" rx="36" ry="34" fill="url(#vrwHair2)"/>
+                <!-- Hair side-locks (slim) -->
+                <path d="M64,76 Q60,116 72,124 L82,122 Q78,104 80,80 Z" fill="url(#vrwHair2)"/>
+                <path d="M136,76 Q140,116 128,124 L118,122 Q122,104 120,80 Z" fill="url(#vrwHair2)"/>
+
+                <!-- HEAD GROUP — head rotates left/right -->
                 <g class="vrw-head">
                   <!-- Face -->
-                  <ellipse cx="100" cy="68" rx="26" ry="30" fill="url(#vrwSkin)"/>
-                  <!-- Hair front bangs -->
-                  <path d="M76,52 Q86,38 100,38 Q116,38 124,54 Q116,46 100,46 Q86,46 76,54 Z" fill="url(#vrwHair)"/>
+                  <ellipse cx="100" cy="68" rx="26" ry="30" fill="url(#vrwFace)" filter="url(#vrwSoftShade)"/>
+                  <!-- Hair bangs -->
+                  <path d="M74,52 Q86,36 100,36 Q116,36 126,54 Q116,46 100,46 Q86,46 74,54 Z" fill="url(#vrwHair2)"/>
                   <!-- Ears -->
-                  <ellipse cx="76" cy="70" rx="4" ry="7" fill="url(#vrwSkin)"/>
-                  <ellipse cx="124" cy="70" rx="4" ry="7" fill="url(#vrwSkin)"/>
-                  <!-- VR Headset body -->
-                  <rect x="70" y="56" width="60" height="22" rx="5" fill="url(#vrwHeadset)"/>
-                  <!-- Strap behind head -->
-                  <rect x="64" y="62" width="72" height="3" rx="1.5" fill="#101013"/>
-                  <!-- Lenses -->
-                  <ellipse cx="86" cy="67" rx="7.5" ry="6" fill="#04101f"/>
-                  <ellipse cx="86" cy="67" rx="6" ry="4.6" fill="url(#vrwLens)"/>
-                  <ellipse cx="83" cy="64" rx="1.6" ry="1" fill="#ffffff" opacity="0.7"/>
-                  <ellipse cx="114" cy="67" rx="7.5" ry="6" fill="#04101f"/>
-                  <ellipse cx="114" cy="67" rx="6" ry="4.6" fill="url(#vrwLens)"/>
-                  <ellipse cx="111" cy="64" rx="1.6" ry="1" fill="#ffffff" opacity="0.7"/>
-                  <!-- LED on bridge -->
-                  <circle cx="100" cy="60" r="0.9" fill="#22ff7a" opacity="0.85"/>
-                  <!-- Mouth (smile, beats slightly with clap) -->
-                  <path class="vrw-mouth" d="M93,84 Q100,88 107,84" stroke="#7a3a22" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                  <!-- Cheek -->
-                  <circle cx="83" cy="80" r="2" fill="#e0907a" opacity="0.45"/>
-                  <circle cx="117" cy="80" r="2" fill="#e0907a" opacity="0.45"/>
+                  <ellipse cx="76" cy="72" rx="4" ry="7" fill="url(#vrwFace)"/>
+                  <ellipse cx="124" cy="72" rx="4" ry="7" fill="url(#vrwFace)"/>
+                  <!-- Cheek warmth -->
+                  <circle cx="84" cy="82" r="2.4" fill="#e58c70" opacity="0.5"/>
+                  <circle cx="116" cy="82" r="2.4" fill="#e58c70" opacity="0.5"/>
+                  <!-- Nose -->
+                  <path d="M98,82 Q98,86 99,88 Q101,89 102,88 Q102,86 102,82 Z" fill="#cf9874" opacity="0.55"/>
+                  <!-- Lips -->
+                  <path d="M93,90 Q100,93 107,90" stroke="#9d4a30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <path class="vrw-mouth" d="M94,90 Q100,92.5 106,90" stroke="#d05b3a" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+                  <!-- VR headset body -->
+                  <rect x="70" y="56" width="60" height="22" rx="6" fill="url(#vrwHs)"/>
+                  <!-- Headset highlight -->
+                  <rect x="71" y="57.5" width="58" height="2" rx="1" fill="#3a3a3e" opacity="0.85"/>
+                  <!-- Headset back strap -->
+                  <rect x="62" y="62" width="76" height="3" rx="1.5" fill="#0d0d10"/>
+                  <!-- Lens housing left -->
+                  <ellipse cx="86" cy="67" rx="8.5" ry="6.5" fill="#04101f"/>
+                  <ellipse cx="86" cy="67" rx="7" ry="5.2" fill="url(#vrwLens2)"/>
+                  <ellipse cx="83" cy="64" rx="2" ry="1.2" fill="#fff" opacity="0.75"/>
+                  <!-- Lens housing right -->
+                  <ellipse cx="114" cy="67" rx="8.5" ry="6.5" fill="#04101f"/>
+                  <ellipse cx="114" cy="67" rx="7" ry="5.2" fill="url(#vrwLens2)"/>
+                  <ellipse cx="111" cy="64" rx="2" ry="1.2" fill="#fff" opacity="0.75"/>
+                  <!-- LED -->
+                  <circle cx="100" cy="58" r="1" fill="#22ff7a" opacity="0.85"/>
+                  <!-- Bridge cutout -->
+                  <path d="M96,76 Q100,80 104,76 L104,72 Q100,75 96,72 Z" fill="#08080b"/>
                 </g>
-                <!-- Left arm / hand -->
+
+                <!-- ARMS -->
+                <!-- Left arm (the one used to point) -->
                 <g class="vrw-arm-left">
-                  <rect x="62" y="116" width="10" height="34" rx="5" fill="url(#vrwShirt)"/>
-                  <circle cx="67" cy="152" r="7" fill="url(#vrwSkin)"/>
+                  <rect x="62" y="116" width="9" height="34" rx="4" fill="url(#vrwTop)"/>
+                  <circle cx="66.5" cy="152" r="6.5" fill="url(#vrwFace)"/>
                 </g>
-                <!-- Right arm / hand -->
+                <!-- Right arm — stays relaxed -->
                 <g class="vrw-arm-right">
-                  <rect x="128" y="116" width="10" height="34" rx="5" fill="url(#vrwShirt)"/>
-                  <circle cx="133" cy="152" r="7" fill="url(#vrwSkin)"/>
+                  <rect x="129" y="116" width="9" height="34" rx="4" fill="url(#vrwTop)"/>
+                  <circle cx="133.5" cy="152" r="6.5" fill="url(#vrwFace)"/>
                 </g>
+
               </g>
             </svg>
           </div>
