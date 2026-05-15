@@ -390,25 +390,30 @@
     .tl-hbi { flex:1; text-align:center; }
     .tl-ht { width:80px; flex-shrink:0; text-align:right; }
 
-    .contacts-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
-    .contact-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm); transition:box-shadow var(--transition); }
-    .contact-card:hover { box-shadow:var(--shadow-md); }
-    .contact-card-header { background:var(--ccc-dark-blue); padding:12px 16px; }
-    .contact-name { font-size:15px; font-weight:600; color:var(--text-primary); margin:2px 0 4px; }
-    .contact-card-region { font-size:13px; color:var(--text-secondary); margin-bottom:8px; }
-    .contact-card-address { display:none; }
-    .contact-phone { display:block; font-size:11.5px; color:var(--text-secondary); margin-top:1px; text-decoration:none; }
-    .contact-phone:hover { color:var(--ccc-medium-blue); }
-    [data-theme="dark"] .contact-phone:hover { color:var(--accent-light); }
-    .contact-body { padding:14px 16px; }
-    .contact-person { display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid var(--border); }
-    .contact-person:last-child { border-bottom:none; }
-    .contact-avatar { width:72px; height:72px; border-radius:50%; background:var(--tier1-bg); color:var(--tier1-color); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; flex-shrink:0; border:1px solid var(--border); }
-    .contact-info { flex:1; min-width:0; }
-    .contact-name { font-size:13px; font-weight:600; color:var(--text-primary); }
-    .contact-role { font-size:11px; color:var(--text-muted); margin-bottom:2px; }
-    .contact-email { font-size:11.5px; color:var(--ccc-medium-blue); word-break:break-all; }
-    [data-theme="dark"] .contact-email { color:var(--accent-light); }
+    .contacts-grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:18px; align-items:stretch; padding:4px 0; }
+    .contact-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; transition:box-shadow var(--transition), border-color var(--transition); display:flex; gap:14px; align-items:flex-start; box-shadow:var(--shadow-sm); }
+    .contact-card:hover { box-shadow:var(--shadow-md); border-color:var(--ccc-medium-blue); }
+    .contact-photo { position:relative; width:64px; height:64px; flex-shrink:0; border-radius:50%; overflow:hidden; background:linear-gradient(135deg, var(--tier1-bg) 0%, var(--bg-surface-2) 100%); }
+    .contact-photo-initials { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:22px; font-weight:600; letter-spacing:-0.01em; color:var(--ccc-dark-blue); z-index:0; }
+    [data-theme="dark"] .contact-photo-initials { color:var(--accent-light); }
+    .contact-photo img { width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:1; }
+    .contact-card-body { flex:1; min-width:0; display:flex; flex-direction:column; }
+    .contact-card-name { font-family:var(--font-display); font-size:14.5px; font-weight:600; color:var(--text-primary); line-height:1.25; letter-spacing:-0.005em; margin:0 0 2px; }
+    .contact-card-title { font-size:11.5px; color:var(--text-secondary); line-height:1.4; }
+    .contact-card-role { display:inline-block; align-self:flex-start; font-size:9.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ccc-medium-blue); margin-top:8px; padding:3px 7px; border:1px solid var(--ccc-medium-blue); border-radius:4px; }
+    [data-theme="dark"] .contact-card-role { color:var(--accent-light); border-color:var(--accent-light); }
+    .contact-card-divider { height:1px; background:var(--border); margin:12px 0 10px; }
+    .contact-card-links { display:flex; flex-direction:column; gap:5px; margin-top:auto; min-width:0; }
+    .contact-card-link { font-size:11.5px; color:var(--text-secondary); text-decoration:none; display:flex; align-items:center; gap:7px; line-height:1.4; min-width:0; cursor:pointer; }
+    .contact-card-link span { min-width:0; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .contact-card-link:hover { color:var(--ccc-medium-blue); text-decoration:underline; }
+    [data-theme="dark"] .contact-card-link:hover { color:var(--accent-light); }
+    .contact-card-link svg { flex-shrink:0; opacity:0.55; }
+    .contact-card-phone-row { display:flex; align-items:center; gap:6px; min-width:0; font-size:11.5px; line-height:1.4; }
+    .contact-card-phone-row .contact-card-link { flex:0 1 auto; }
+    .contact-card-phone-row .contact-card-link span { flex:0 0 auto; overflow:visible; text-overflow:clip; }
+    .contact-card-ext { color:var(--text-muted); flex-shrink:0; }
+    @media (max-width:1000px) { .contacts-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); } }
 
     .mobile-nav { display:none; position:fixed; bottom:0; left:0; right:0; height:var(--mobile-nav-h); background:var(--ccc-dark-blue); border-top:1px solid rgba(255,255,255,0.1); z-index:300; padding:0 4px; }
     .mobile-nav-inner { display:flex; height:100%; }
@@ -499,10 +504,10 @@
     /* Overview hero card — wraps title + ticker on dark slate */
     .overview-hero { background:var(--bg-surface); border-radius:var(--radius-lg); padding:18px 26px 18px; margin-bottom:24px; box-shadow:var(--shadow-sm); border:1px solid var(--border); border-left:3px solid var(--kccd-red); position:relative; }
     .overview-hero-text { position:relative; }
-    .overview-hero-text h2 { padding-right:120px; }
-    .overview-hero-avatar { position:absolute; right:6px; top:-4px; width:110px; height:110px; pointer-events:none; perspective:640px; }
+    .overview-hero-text h2 { padding-right:104px; min-height:92px; display:flex; align-items:flex-start; }
+    .overview-hero-avatar { position:absolute; right:8px; top:-2px; width:92px; height:92px; pointer-events:none; perspective:680px; }
     .overview-hero-avatar .vr-woman { width:100%; height:100%; overflow:visible; display:block; }
-    @media (max-width:560px) { .overview-hero { padding:16px 18px 14px; } .overview-hero-text h2 { padding-right:90px; } .overview-hero-avatar { width:88px; height:88px; right:4px; top:-2px; } }
+    @media (max-width:560px) { .overview-hero { padding:16px 18px 14px; } .overview-hero-text h2 { padding-right:80px; min-height:74px; } .overview-hero-avatar { width:74px; height:74px; right:4px; top:0; } }
     .overview-hero h2 { font-family:var(--font-display); font-size:26px; font-weight:600; color:var(--text-primary); line-height:1.2; margin:0; letter-spacing:-0.02em; }
     .overview-hero .overview-ticker { margin-top:12px; }
     [data-theme="dark"] .overview-hero { background:var(--bg-card); border-left-color:var(--kccd-red); }
@@ -752,30 +757,47 @@
             </div>
           </div>
           <div class="overview-hero-avatar" role="img" aria-label="Animated portrait of a woman wearing a white VR headset, looking left, right, and forward on a loop">
-            <svg viewBox="30 4 140 140" xmlns="http://www.w3.org/2000/svg" class="vr-woman" aria-hidden="true">
+            <svg viewBox="28 0 144 144" xmlns="http://www.w3.org/2000/svg" class="vr-woman" aria-hidden="true">
               <defs>
-                <!-- === Skin === -->
+                <!-- Skin tones with stronger contour shading for a 3D look -->
                 <radialGradient id="vrwSkin" cx="42%" cy="38%" r="78%">
-                  <stop offset="0%"   stop-color="#f5d3aa"/>
-                  <stop offset="40%"  stop-color="#e0aa83"/>
-                  <stop offset="80%"  stop-color="#a3724e"/>
-                  <stop offset="100%" stop-color="#6f4226"/>
+                  <stop offset="0%"   stop-color="#f7d6ad"/>
+                  <stop offset="42%"  stop-color="#e0aa83"/>
+                  <stop offset="82%"  stop-color="#a0704a"/>
+                  <stop offset="100%" stop-color="#5e3a21"/>
+                </radialGradient>
+                <radialGradient id="vrwForehead" cx="50%" cy="20%" r="55%">
+                  <stop offset="0%"   stop-color="#ffe2bc" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#ffe2bc" stop-opacity="0"/>
                 </radialGradient>
                 <radialGradient id="vrwSkinCheek" cx="50%" cy="60%" r="60%">
-                  <stop offset="0%"   stop-color="#e98a6a" stop-opacity="0.55"/>
+                  <stop offset="0%"   stop-color="#e98a6a" stop-opacity="0.5"/>
                   <stop offset="100%" stop-color="#e98a6a" stop-opacity="0"/>
                 </radialGradient>
                 <linearGradient id="vrwJaw" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%"   stop-color="#000" stop-opacity="0"/>
-                  <stop offset="100%" stop-color="#46261a" stop-opacity="0.32"/>
+                  <stop offset="100%" stop-color="#3a2014" stop-opacity="0.45"/>
                 </linearGradient>
-                <linearGradient id="vrwTempleShade" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%"   stop-color="#7a4a30" stop-opacity="0.35"/>
-                  <stop offset="22%"  stop-color="#7a4a30" stop-opacity="0"/>
-                  <stop offset="78%"  stop-color="#7a4a30" stop-opacity="0"/>
-                  <stop offset="100%" stop-color="#7a4a30" stop-opacity="0.35"/>
+                <linearGradient id="vrwSideShade" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%"   stop-color="#5a3320" stop-opacity="0.45"/>
+                  <stop offset="22%"  stop-color="#5a3320" stop-opacity="0"/>
+                  <stop offset="78%"  stop-color="#5a3320" stop-opacity="0"/>
+                  <stop offset="100%" stop-color="#5a3320" stop-opacity="0.45"/>
                 </linearGradient>
-                <!-- === Hair === -->
+                <linearGradient id="vrwNoseShade" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%"   stop-color="#7a4630" stop-opacity="0"/>
+                  <stop offset="50%"  stop-color="#7a4630" stop-opacity="0"/>
+                  <stop offset="100%" stop-color="#7a4630" stop-opacity="0.35"/>
+                </linearGradient>
+                <linearGradient id="vrwNoseLit" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%"   stop-color="#ffe1b8" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#ffe1b8" stop-opacity="0"/>
+                </linearGradient>
+                <radialGradient id="vrwCheekbone" cx="50%" cy="50%" r="60%">
+                  <stop offset="0%"   stop-color="#fff1d6" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="#fff1d6" stop-opacity="0"/>
+                </radialGradient>
+                <!-- Hair -->
                 <linearGradient id="vrwHairBase" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%"   stop-color="#2a1610"/>
                   <stop offset="55%"  stop-color="#160a05"/>
@@ -785,7 +807,7 @@
                   <stop offset="0%"   stop-color="#8a5530" stop-opacity="0.85"/>
                   <stop offset="100%" stop-color="#8a5530" stop-opacity="0"/>
                 </linearGradient>
-                <!-- === Vision-Pro WHITE headset body === -->
+                <!-- White Vision-Pro headset body -->
                 <linearGradient id="vrwHsWhite" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%"   stop-color="#ffffff"/>
                   <stop offset="40%"  stop-color="#f1f3f6"/>
@@ -803,7 +825,6 @@
                   <stop offset="0%"   stop-color="#000" stop-opacity="0"/>
                   <stop offset="100%" stop-color="#2a2f35" stop-opacity="0.4"/>
                 </linearGradient>
-                <!-- === Visor glass === -->
                 <linearGradient id="vrwGlass" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%"   stop-color="#3a414c"/>
                   <stop offset="22%"  stop-color="#1c2330"/>
@@ -819,7 +840,6 @@
                   <stop offset="0%"   stop-color="#5a626c" stop-opacity="0.65"/>
                   <stop offset="100%" stop-color="#5a626c" stop-opacity="0"/>
                 </linearGradient>
-                <!-- === Recessed lens wells === -->
                 <radialGradient id="vrwLensWell" cx="38%" cy="32%" r="74%">
                   <stop offset="0%"   stop-color="#cfeaff"/>
                   <stop offset="28%"  stop-color="#4ea7f2"/>
@@ -831,22 +851,14 @@
                   <stop offset="80%"  stop-color="#000" stop-opacity="0"/>
                   <stop offset="100%" stop-color="#000" stop-opacity="0.7"/>
                 </radialGradient>
-                <!-- === Strap (woven fabric) === -->
                 <linearGradient id="vrwStrap" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%"   stop-color="#eceae5"/>
                   <stop offset="100%" stop-color="#b8b4ab"/>
                 </linearGradient>
-                <linearGradient id="vrwStrapWeave" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#000" stop-opacity="0"/>
-                  <stop offset="50%" stop-color="#000" stop-opacity="0.12"/>
-                  <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-                </linearGradient>
-                <!-- === Foam liner === -->
                 <linearGradient id="vrwFoam" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stop-color="#2a2a2e"/>
                   <stop offset="100%" stop-color="#0e0e10"/>
                 </linearGradient>
-                <!-- === Filters === -->
                 <filter id="vrwVisorShadow" x="-20%" y="-20%" width="140%" height="160%">
                   <feGaussianBlur in="SourceAlpha" stdDeviation="1.4"/>
                   <feOffset dx="0" dy="1.6"/>
@@ -862,107 +874,81 @@
                 </filter>
               </defs>
 
-              <!-- Breathing wrapper -->
               <g class="vrw-breath">
-                <!-- HEAD GROUP -->
                 <g class="vrw-head">
-
-                  <!-- Hair back/halo (behind face) -->
-                  <path d="M62,52 Q64,26 100,24 Q136,26 138,52 L140,96 Q126,102 100,102 Q74,102 60,96 Z" fill="url(#vrwHairBase)"/>
-                  <!-- Hair top highlight strand -->
-                  <path d="M70,40 Q92,26 100,26 Q108,26 130,40 Q108,32 100,32 Q92,32 70,40 Z" fill="url(#vrwHairShine)" opacity="0.6"/>
+                  <!-- Back hair halo -->
+                  <path d="M62,50 Q64,24 100,22 Q136,24 138,50 L140,96 Q126,102 100,102 Q74,102 60,96 Z" fill="url(#vrwHairBase)"/>
+                  <!-- Hair top highlight -->
+                  <path d="M70,38 Q92,26 100,26 Q108,26 130,38 Q108,32 100,32 Q92,32 70,38 Z" fill="url(#vrwHairShine)" opacity="0.6"/>
                   <!-- Side hair locks -->
                   <path d="M62,72 Q58,100 70,104 L82,102 Q78,86 80,70 Z" fill="url(#vrwHairBase)"/>
                   <path d="M138,72 Q142,100 130,104 L118,102 Q122,86 120,70 Z" fill="url(#vrwHairBase)"/>
-                  <!-- A few loose strands for realism -->
-                  <path d="M70,46 Q76,44 84,46" stroke="#0f0805" stroke-width="0.6" fill="none" opacity="0.6"/>
-                  <path d="M116,46 Q124,44 130,46" stroke="#0f0805" stroke-width="0.6" fill="none" opacity="0.6"/>
-                  <path d="M66,82 Q70,90 76,96" stroke="#321d12" stroke-width="0.7" fill="none" opacity="0.5"/>
-                  <path d="M134,82 Q130,90 124,96" stroke="#321d12" stroke-width="0.7" fill="none" opacity="0.5"/>
 
-                  <!-- Face shape (no neck) -->
+                  <!-- Face: warm base with stronger shading for 3D depth -->
                   <path d="M74,60 Q74,40 100,40 Q126,40 126,60 L124,84 Q120,98 100,100 Q80,98 76,84 Z" fill="url(#vrwSkin)" filter="url(#vrwSoftBlur)"/>
-                  <!-- Temple shading -->
-                  <path d="M74,52 L126,52 L124,86 Q100,98 76,86 Z" fill="url(#vrwTempleShade)"/>
-                  <!-- Cheek warmth glow -->
-                  <ellipse cx="84" cy="83" rx="5.2" ry="3.6" fill="url(#vrwSkinCheek)"/>
-                  <ellipse cx="116" cy="83" rx="5.2" ry="3.6" fill="url(#vrwSkinCheek)"/>
+                  <!-- Forehead highlight (frontal lighting) -->
+                  <ellipse cx="100" cy="50" rx="20" ry="9" fill="url(#vrwForehead)"/>
+                  <!-- Side temple/cheek shading -->
+                  <path d="M74,52 L126,52 L124,86 Q100,98 76,86 Z" fill="url(#vrwSideShade)"/>
+                  <!-- Cheekbone highlights -->
+                  <ellipse cx="86" cy="80" rx="5.5" ry="3.6" fill="url(#vrwCheekbone)" opacity="0.8"/>
+                  <ellipse cx="114" cy="80" rx="5.5" ry="3.6" fill="url(#vrwCheekbone)" opacity="0.8"/>
+                  <!-- Cheek warmth -->
+                  <ellipse cx="84" cy="84" rx="4.6" ry="3" fill="url(#vrwSkinCheek)"/>
+                  <ellipse cx="116" cy="84" rx="4.6" ry="3" fill="url(#vrwSkinCheek)"/>
                   <!-- Jawline shadow -->
                   <path d="M76,84 Q100,100 124,84 L122,92 Q100,102 78,92 Z" fill="url(#vrwJaw)"/>
 
                   <!-- Ears -->
                   <path d="M73,68 Q70,72 71,80 Q73,84 78,82 L78,68 Z" fill="url(#vrwSkin)"/>
-                  <path d="M73,71 Q72,75 73,79" stroke="#6f4226" stroke-width="0.5" fill="none" opacity="0.6"/>
                   <path d="M127,68 Q130,72 129,80 Q127,84 122,82 L122,68 Z" fill="url(#vrwSkin)"/>
-                  <path d="M127,71 Q128,75 127,79" stroke="#6f4226" stroke-width="0.5" fill="none" opacity="0.6"/>
 
-                  <!-- Hair bangs over forehead -->
+                  <!-- Hair bangs -->
                   <path d="M74,50 Q86,38 100,38 Q116,38 126,52 Q116,46 100,46 Q86,46 74,52 Z" fill="url(#vrwHairBase)"/>
-                  <!-- A wisp of hair at the part -->
-                  <path d="M98,38 Q100,44 102,38" stroke="#1c0e07" stroke-width="0.6" fill="none" opacity="0.7"/>
 
-                  <!-- Eyebrows (fine hair strokes) -->
+                  <!-- Eyebrows -->
                   <path d="M82,54 Q88,51 94,53" stroke="#1a0e07" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-                  <path d="M83,53.6 Q86,52.2 89,52.8" stroke="#1a0e07" stroke-width="0.5" fill="none" opacity="0.7"/>
-                  <path d="M89,52.8 Q91,52 94,53" stroke="#1a0e07" stroke-width="0.5" fill="none" opacity="0.7"/>
                   <path d="M106,53 Q112,51 118,54" stroke="#1a0e07" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-                  <path d="M106,52.8 Q109,52 112,52.6" stroke="#1a0e07" stroke-width="0.5" fill="none" opacity="0.7"/>
-                  <path d="M112,52.6 Q115,52 118,53.6" stroke="#1a0e07" stroke-width="0.5" fill="none" opacity="0.7"/>
 
-                  <!-- Nose (subtle definition) -->
-                  <path d="M98,80 Q97.6,86 99,89.2 Q100.5,90 101,89.2 Q102.4,86 102,80 Z" fill="#c79172" opacity="0.55"/>
-                  <path d="M99,89.4 Q100,90.4 101,89.4" stroke="#7a4630" stroke-width="0.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-                  <path d="M97.5,88.6 Q98,89.4 99,89.4" stroke="#7a4630" stroke-width="0.4" fill="none" opacity="0.4"/>
-                  <path d="M102.5,88.6 Q102,89.4 101,89.4" stroke="#7a4630" stroke-width="0.4" fill="none" opacity="0.4"/>
+                  <!-- Nose: bridge with one-sided lighting for 3D depth -->
+                  <path d="M98,80 Q97.4,86 98.8,89.4 Q100,90.2 101.2,89.4 Q102.6,86 102,80 Z" fill="#c79172" opacity="0.55"/>
+                  <!-- Nose bridge light (left side facing light) -->
+                  <path d="M97.6,80 Q97.2,86 98.4,89.2 L98.8,87 Q98,84 98,80 Z" fill="url(#vrwNoseLit)"/>
+                  <!-- Nose bridge shadow (right side away from light) -->
+                  <path d="M102,80 Q102.6,86 101.4,89.4 L100.6,86 Q101.6,83 101.6,80 Z" fill="url(#vrwNoseShade)"/>
+                  <!-- Nose tip shadow -->
+                  <path d="M98.6,89 Q100,90.4 101.4,89" stroke="#7a4630" stroke-width="0.55" fill="none" stroke-linecap="round" opacity="0.55"/>
+                  <!-- Nostril hints -->
+                  <ellipse cx="98.4" cy="89.4" rx="0.6" ry="0.4" fill="#5a3320" opacity="0.45"/>
+                  <ellipse cx="101.6" cy="89.4" rx="0.6" ry="0.4" fill="#5a3320" opacity="0.45"/>
 
-                  <!-- Lips: natural shape with cupid's bow + subtle line -->
-                  <path d="M93,92.6 Q95.6,90.6 97.6,91.6 Q100,92.4 102.4,91.6 Q104.4,90.6 107,92.6" stroke="#8a3a26" stroke-width="0.6" fill="none" stroke-linecap="round" opacity="0.55"/>
-                  <path d="M92.4,93 Q96,95.4 100,94.8 Q104,95.4 107.6,93 Q104,96.8 100,97 Q96,96.8 92.4,93 Z" fill="#b54d33"/>
-                  <path d="M93.6,92.9 Q100,93.8 106.4,92.9" stroke="#3a1810" stroke-width="0.45" fill="none" opacity="0.6"/>
-                  <path d="M94.8,94.8 Q100,95.6 105.2,94.8" stroke="#ffffff" stroke-width="0.3" fill="none" opacity="0.35"/>
+                  <!-- Lips: simple, natural -->
+                  <path d="M93,93.4 Q100,91.8 107,93.4 Q104,97 100,97.2 Q96,97 93,93.4 Z" fill="#b5604a"/>
+                  <path d="M93.6,93.6 Q100,94.4 106.4,93.6" stroke="#5a2818" stroke-width="0.4" fill="none" opacity="0.55"/>
+                  <path d="M96,96 Q100,96.6 104,96" stroke="#ffffff" stroke-width="0.25" fill="none" opacity="0.35"/>
 
-                  <!-- Subtle chin shadow -->
-                  <path d="M93,97 Q100,99 107,97" stroke="#5a3320" stroke-width="0.5" fill="none" opacity="0.35"/>
-
-                  <!-- ===== VR HEADSET (white Vision Pro style) ===== -->
-                  <!-- Cast shadow under visor -->
+                  <!-- ===== VR Headset (white Vision-Pro style) ===== -->
                   <ellipse cx="100" cy="80" rx="36" ry="6.4" fill="#000" opacity="0.2"/>
 
-                  <!-- Strap fabric behind head -->
+                  <!-- Strap behind head -->
                   <path d="M58,62 Q53,68 56,74 Q60,77 64,76 L74,72 Q70,66 70,62 Z" fill="url(#vrwStrap)"/>
-                  <path d="M58,62 Q53,68 56,74 Q60,77 64,76 L74,72 Q70,66 70,62 Z" fill="url(#vrwStrapWeave)" opacity="0.6"/>
                   <path d="M142,62 Q147,68 144,74 Q140,77 136,76 L126,72 Q130,66 130,62 Z" fill="url(#vrwStrap)"/>
-                  <path d="M142,62 Q147,68 144,74 Q140,77 136,76 L126,72 Q130,66 130,62 Z" fill="url(#vrwStrapWeave)" opacity="0.6"/>
-                  <!-- Strap top arc behind head -->
                   <path d="M58,64 Q34,70 32,82 Q34,94 58,98" stroke="url(#vrwStrap)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
                   <path d="M142,64 Q166,70 168,82 Q166,94 142,98" stroke="url(#vrwStrap)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
 
-                  <!-- White face plate body (curved) -->
-                  <path d="M70,58 Q72,52 80,51 L120,51 Q128,52 130,58 L131,75 Q128,81 120,82 L80,82 Q72,81 69,75 Z"
-                        fill="url(#vrwHsWhite)" filter="url(#vrwVisorShadow)"/>
-                  <!-- Horizontal curve highlight -->
-                  <path d="M70,58 Q72,52 80,51 L120,51 Q128,52 130,58 L130,60 Q100,55 70,60 Z"
-                        fill="url(#vrwHsCurve)" opacity="0.7"/>
-                  <!-- Bottom rim subtle shadow -->
+                  <!-- White face plate -->
+                  <path d="M70,58 Q72,52 80,51 L120,51 Q128,52 130,58 L131,75 Q128,81 120,82 L80,82 Q72,81 69,75 Z" fill="url(#vrwHsWhite)" filter="url(#vrwVisorShadow)"/>
+                  <path d="M70,58 Q72,52 80,51 L120,51 Q128,52 130,58 L130,60 Q100,55 70,60 Z" fill="url(#vrwHsCurve)" opacity="0.7"/>
                   <path d="M70,75 Q100,82 130,75 L131,79 Q100,86 69,79 Z" fill="url(#vrwHsRimShade)"/>
-                  <!-- Outline rim line -->
-                  <path d="M70,58 Q72,52 80,51 L120,51 Q128,52 130,58" stroke="#cfd3d9" stroke-width="0.5" fill="none" opacity="0.65"/>
 
-                  <!-- Dark tinted visor glass inset -->
-                  <path d="M75,60 Q78,57 84,57 L116,57 Q122,57 125,60 L125,73 Q122,77 116,77 L84,77 Q78,77 75,73 Z"
-                        fill="url(#vrwGlass)"/>
-                  <!-- Inner glass bezel highlight -->
-                  <path d="M75,60 Q78,57 84,57 L116,57 Q122,57 125,60 L125,73 Q122,77 116,77 L84,77 Q78,77 75,73 Z"
-                        fill="none" stroke="url(#vrwGlassEdge)" stroke-width="0.6"/>
-                  <!-- Top specular reflection band -->
-                  <path d="M76,60 Q78,57.5 84,57.5 L116,57.5 Q122,57.5 124,60 L124,64 Q100,58 76,64 Z"
-                        fill="url(#vrwGlassTopReflect)"/>
-                  <!-- Soft diagonal sheen across glass -->
+                  <!-- Visor glass -->
+                  <path d="M75,60 Q78,57 84,57 L116,57 Q122,57 125,60 L125,73 Q122,77 116,77 L84,77 Q78,77 75,73 Z" fill="url(#vrwGlass)"/>
+                  <path d="M75,60 Q78,57 84,57 L116,57 Q122,57 125,60 L125,73 Q122,77 116,77 L84,77 Q78,77 75,73 Z" fill="none" stroke="url(#vrwGlassEdge)" stroke-width="0.6"/>
+                  <path d="M76,60 Q78,57.5 84,57.5 L116,57.5 Q122,57.5 124,60 L124,64 Q100,58 76,64 Z" fill="url(#vrwGlassTopReflect)"/>
                   <path d="M82,58 L96,76 L93,76 L79,60 Z" fill="#ffffff" opacity="0.06"/>
-                  <!-- Center bridge cutout -->
                   <path d="M96,77 Q100,79.5 104,77 L104,73.5 Q100,75.5 96,73.5 Z" fill="#04070c"/>
 
-                  <!-- Recessed lens wells with rim shading -->
+                  <!-- Lens wells -->
                   <ellipse cx="86" cy="67" rx="7.8" ry="6.2" fill="#020610"/>
                   <ellipse cx="86" cy="67" rx="6.4" ry="4.9" fill="url(#vrwLensWell)"/>
                   <ellipse cx="86" cy="67" rx="6.4" ry="4.9" fill="url(#vrwLensInnerRim)"/>
@@ -975,22 +961,18 @@
                   <ellipse class="vrw-catch" cx="111.4" cy="64.6" rx="2" ry="1.2" fill="#ffffff" opacity="0.92"/>
                   <ellipse cx="114" cy="69.6" rx="3.6" ry="1.4" fill="#0a2348" opacity="0.6"/>
 
-                  <!-- Foam liner under bottom edge -->
+                  <!-- Foam liner -->
                   <path d="M72,79 Q100,84.5 128,79 L127,83 Q100,88 73,83 Z" fill="url(#vrwFoam)"/>
                   <path d="M73,80.6 Q100,85 127,80.6" stroke="#46464c" stroke-width="0.5" fill="none" opacity="0.75"/>
-                  <path d="M75,82 Q100,86 125,82" stroke="#1a1a1d" stroke-width="0.5" fill="none" opacity="0.6"/>
 
-                  <!-- Side strap mount caps (matte light gray with spec highlight) -->
+                  <!-- Strap mount caps -->
                   <rect x="64" y="60" width="7" height="13" rx="2.2" fill="#d6dadf"/>
                   <rect x="64.7" y="60.8" width="2.2" height="3.4" rx="0.6" fill="#ffffff" opacity="0.9"/>
-                  <line x1="64.5" y1="65" x2="70.5" y2="65" stroke="#a6acb2" stroke-width="0.3" opacity="0.6"/>
                   <rect x="129" y="60" width="7" height="13" rx="2.2" fill="#d6dadf"/>
                   <rect x="133.1" y="60.8" width="2.2" height="3.4" rx="0.6" fill="#ffffff" opacity="0.9"/>
-                  <line x1="129.5" y1="65" x2="135.5" y2="65" stroke="#a6acb2" stroke-width="0.3" opacity="0.6"/>
 
-                  <!-- Power LED on right cap -->
+                  <!-- Power LED -->
                   <circle class="vrw-led" cx="132.6" cy="71" r="0.95" fill="#22ff7a" filter="url(#vrwLedGlow)"/>
-
                 </g>
               </g>
             </svg>
@@ -1434,7 +1416,7 @@ const districts = [
       'Leadership Pipeline Development: ≥40% of Year-1 participants advance to mentor roles in Year-2 and ≥25% of alumni document new leadership/service in professional portfolios',
       'Student Engagement & Equity: In participating sections, ≥70% of students report increased engagement/interest (post-lesson survey), with no engagement gap >10 percentage points between student demographic groups'
     ],
-    contact:{name:'Bobby Becka',role:'Project Lead Contact',email:'bobby.becka@kccd.edu',phone:'(661) 395-4102'},
+    contact:{name:'Bobby Becka',role:'Project Lead Contact',email:'bobby.becka@kccd.edu',phone:'(661) 395-4102',photo:'photos/bobby-beck.jpeg'},
     altContact:{name:'Dr. Bonita Steele',role:'Alternate Project Lead Contact',email:'bsteele@kccd.edu',phone:'(661) 336-5046'},
     fiscalReporter:{name:'Cathi Jacob',role:'Institution Project Fiscal Reporter',email:'cjacob@kccd.edu',phone:'(661) 336-5105'},
     planApprover:{name:'Melissa Thornsberry',role:'Plan Approver',email:'melissa.thornsberry@kccd.edu',phone:'(661) 336-5142'},
@@ -2297,31 +2279,36 @@ function translateRole(r) { return ROLE_KEYS[r] ? t(ROLE_KEYS[r]) : r; }
 function renderContacts() {
   const grid = document.getElementById('contacts-grid');
   if (!grid) return;
-  grid.innerHTML = districts.map(d => {
+  const initials = n => n.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0,2).join('').toUpperCase();
+  const mailIcon = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
+  const phoneIcon = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+  const html = districts.flatMap(d => {
     const people = [d.contact, d.altContact, d.fiscalReporter, d.planApprover].filter(Boolean);
-    const tierLabel = d.lift ? `${t('kpi_lift')} · ${d.liftRegion}` : `${t('th_tier')} ${d.tier}`;
-    return `
+    const extras = Array.isArray(d.additionalContacts) ? d.additionalContacts : [];
+    return [...people, ...extras].map(p => {
+      const photoBlock = p.photo
+        ? `<div class="contact-photo"><div class="contact-photo-initials">${initials(p.name)}</div><img src="${p.photo}" alt="${p.name}" loading="lazy"/></div>`
+        : `<div class="contact-photo"><div class="contact-photo-initials">${initials(p.name)}</div></div>`;
+      const phoneLink = p.phone ? `<div class="contact-card-phone-row"><a class="contact-card-link" href="tel:${p.phone.replace(/[^0-9+]/g,'')}">${phoneIcon}<span>${p.phone}</span></a></div>` : '';
+      return `
       <div class="contact-card">
-        <div class="contact-card-head">
-          <div class="contact-avatar">${people[0] ? people[0].name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase() : d.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase()}</div><div class="contact-identity"><div class="contact-name">${people[0] ? people[0].name : d.name}</div><div class="contact-role">${people[0] ? translateRole(people[0].role) : ''}</div><div class="contact-badge">${translateRole(people[0] ? people[0].role : '')}</div></div>
-          <div class="
-          <div class="
-        </div>
-        <div class="contact-divider"></div><div class="contact-meta">
-          ${people.map(p => `
-            <div class="contact-person">
-              <div class="contact-avatar">${p.name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase()}</div>
-              <div class="contact-info">
-                <div class="contact-name">${p.name}</div>
-                <div class="contact-role">${translateRole(p.role)}</div>
-                <a class="contact-email" href="mailto:${p.email}">${p.email}</a>
-                ${p.phone ? `<a class="contact-phone" href="tel:${p.phone.replace(/[^0-9+]/g,'')}">${p.phone}</a>` : ''}
-              </div>
-            </div>`).join('')}
+        ${photoBlock}
+        <div class="contact-card-body">
+          <div class="contact-card-name">${p.name}</div>
+          <div class="contact-card-title">${translateRole(p.role)}</div>
+          <div class="contact-card-role">${translateRole(p.role)}</div>
+          <div class="contact-card-divider"></div>
+          <div class="contact-card-links">
+            <a class="contact-card-link" href="mailto:${p.email}">${mailIcon}<span>${p.email}</span></a>
+            ${phoneLink}
+          </div>
         </div>
       </div>`;
+    });
   }).join('');
+  grid.innerHTML = html;
 }
+
 
 /* ════════════ CHARTS ════════════ */
 let chartInstances = {};
