@@ -202,14 +202,16 @@
     .card-header { padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--bg-surface-2); }
     .card-title { font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--text-primary); }
     .card-body { padding:20px; }
-    .data-table-wrap { overflow-x:auto; }
-    .data-table { width:100%; font-size:13px; }
-    .data-table th { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-secondary); padding:11px 16px; text-align:left; border-bottom:2px solid var(--border); white-space:nowrap; background:var(--bg-surface-2); }
-    .data-table td { padding:11px 16px; border-bottom:1px solid var(--border); vertical-align:middle; }
+    .data-table-wrap { overflow-x:auto; border-radius:var(--radius-md); }
+    .data-table { width:100%; font-size:13px; border-collapse:collapse; }
+    .data-table th { font-size:10.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); padding:14px 18px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; background:transparent; }
+    .data-table th.num, .data-table td.num { text-align:right; font-variant-numeric:tabular-nums; }
+    .data-table th.center, .data-table td.center { text-align:center; }
+    .data-table td { padding:13px 18px; border-bottom:1px solid var(--border); vertical-align:middle; color:var(--text-primary); }
     .data-table tr:last-child td { border-bottom:none; }
     .data-table tr:hover td { background:var(--bg-surface-2); }
-    .data-table .amount { font-family:var(--font-body); font-weight:600; font-size:13px; color:var(--ccc-dark-blue); }
-    [data-theme="dark"] .data-table .amount { color:var(--accent-light); }
+    .data-table .amount { font-family:var(--font-body); font-weight:500; font-size:13px; color:var(--text-primary); font-variant-numeric:tabular-nums; }
+    [data-theme="dark"] .data-table .amount { color:var(--text-primary); }
     .tier-badge { position:relative; display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:20px; font-size:11px; font-weight:700; white-space:nowrap; }
     .tier-badge.tier1 { background:var(--tier1-bg); color:var(--tier1-color); }
     .tier-badge.tier2 { background:var(--tier2-bg); color:var(--tier2-color); }
@@ -285,10 +287,13 @@
     body[data-year-filter="y2"] .spend-year-row[data-year-key="y1"],
     body[data-year-filter="y2"] .spend-line-row[data-year-key="y1"] { display:none; }
     /* ════════════ SPEND-DOWN — line-item detail rows ════════════ */
-    .spend-year-row td { background:rgba(0,47,109,0.04); padding-top:12px; padding-bottom:12px; }
-    [data-theme="dark"] .spend-year-row td { background:rgba(64,180,229,0.06); }
-    .spend-line-row td { padding-top:7px; padding-bottom:7px; background:var(--bg-card); border-bottom:1px solid var(--border); }
-    .spend-line-row:hover td { background:var(--bg-surface); }
+    .spend-year-row td { background:rgba(0,107,103,0.04); padding-top:14px; padding-bottom:14px; border-top:1px solid var(--border); }
+    [data-theme="dark"] .spend-year-row td { background:rgba(64,180,229,0.05); }
+    .spend-line-row td { padding-top:10px; padding-bottom:10px; background:transparent; border-bottom:1px solid var(--border); }
+    .spend-line-row:hover td { background:var(--bg-surface-2); }
+    .spend-table-pill { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:14px; font-size:11px; font-weight:600; letter-spacing:0.02em; white-space:nowrap; border:1px solid currentColor; background:transparent; cursor:pointer; transition:all 140ms ease; }
+    .spend-table-pill:hover { filter:brightness(1.08); }
+    .spend-table-pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
     /* ════════════ GOALS & OBJECTIVES ════════════ */
     .goals-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:24px; }
     @media (max-width:1080px) { .goals-grid { grid-template-columns:1fr; } }
@@ -494,7 +499,10 @@
     @media (max-width:760px) { .kccd-topbar-stamp { padding:4px 10px; height:34px; } .kccd-topbar-stamp img { height:18px; } } @media (max-width:520px) { .kccd-topbar-stamp { display:none; } }
 
     /* Overview hero card — wraps title + ticker on dark slate */
-    .overview-hero { background:var(--bg-surface); border-radius:var(--radius-lg); padding:22px 26px 18px; margin-bottom:24px; box-shadow:var(--shadow-sm); border:1px solid var(--border); border-left:3px solid var(--kccd-red); }
+    .overview-hero { background:var(--bg-surface); border-radius:var(--radius-lg); padding:20px 26px 16px; margin-bottom:24px; box-shadow:var(--shadow-sm); border:1px solid var(--border); border-left:3px solid var(--kccd-red); display:flex; align-items:center; gap:18px; }
+    .overview-hero-text { flex:1; min-width:0; }
+    .overview-hero-avatar { width:110px; height:110px; flex-shrink:0; }
+    @media (max-width:560px) { .overview-hero { flex-direction:column; align-items:flex-start; } .overview-hero-avatar { width:88px; height:88px; align-self:flex-end; } }
     .overview-hero h2 { font-family:var(--font-display); font-size:26px; font-weight:600; color:var(--text-primary); line-height:1.2; margin:0; letter-spacing:-0.02em; }
     .overview-hero .overview-ticker { margin-top:12px; }
     [data-theme="dark"] .overview-hero { background:var(--bg-card); border-left-color:var(--kccd-red); }
@@ -587,6 +595,56 @@
     html[data-a11y-spacing="on"] body { line-height:1.85; letter-spacing:0.02em; word-spacing:0.06em; }
     html[data-a11y-guide="on"] .a11y-reading-guide { display:block; }
     .a11y-reading-guide { position:fixed; left:0; right:0; height:34px; background:rgba(255,221,0,0.20); border-top:1px solid rgba(255,180,0,0.5); border-bottom:1px solid rgba(255,180,0,0.5); pointer-events:none; z-index:998; display:none; }
+
+    /* Program Overview avatar — woman in VR: touches headset, looks around, claps */
+    .vr-woman { display:block; width:100%; height:100%; overflow:visible; }
+    .vr-woman .vrw-head { transform-origin:100px 78px; animation:vrw-head 12s ease-in-out infinite; }
+    .vr-woman .vrw-arm-left { transform-origin:67px 118px; animation:vrw-arm-left 12s ease-in-out infinite; }
+    .vr-woman .vrw-arm-right { transform-origin:133px 118px; animation:vrw-arm-right 12s ease-in-out infinite; }
+    .vr-woman .vrw-mouth { animation:vrw-mouth 12s ease-in-out infinite; transform-origin:100px 86px; }
+    @keyframes vrw-head {
+      0%, 18% { transform:rotate(0deg); }
+      26% { transform:rotate(14deg); }         /* look right */
+      42% { transform:rotate(-14deg); }        /* look left */
+      55%, 100% { transform:rotate(0deg); }    /* look forward, hold */
+    }
+    @keyframes vrw-arm-left {
+      0% { transform:rotate(0deg); }
+      8% { transform:rotate(-72deg) translate(8px,-6px); }       /* reach up to touch headset */
+      18% { transform:rotate(-72deg) translate(8px,-6px); }      /* hold the touch */
+      24% { transform:rotate(0deg); }                            /* back down */
+      55% { transform:rotate(0deg); }
+      62% { transform:rotate(-22deg) translate(18px,-18px); }    /* clap position A */
+      66% { transform:rotate(-22deg) translate(28px,-18px); }    /* clap toward middle */
+      70% { transform:rotate(-22deg) translate(18px,-18px); }
+      74% { transform:rotate(-22deg) translate(28px,-18px); }
+      78% { transform:rotate(-22deg) translate(18px,-18px); }
+      82% { transform:rotate(-22deg) translate(28px,-18px); }
+      88%, 100% { transform:rotate(0deg); }
+    }
+    @keyframes vrw-arm-right {
+      0% { transform:rotate(0deg); }
+      8% { transform:rotate(72deg) translate(-8px,-6px); }
+      18% { transform:rotate(72deg) translate(-8px,-6px); }
+      24% { transform:rotate(0deg); }
+      55% { transform:rotate(0deg); }
+      62% { transform:rotate(22deg) translate(-18px,-18px); }
+      66% { transform:rotate(22deg) translate(-28px,-18px); }
+      70% { transform:rotate(22deg) translate(-18px,-18px); }
+      74% { transform:rotate(22deg) translate(-28px,-18px); }
+      78% { transform:rotate(22deg) translate(-18px,-18px); }
+      82% { transform:rotate(22deg) translate(-28px,-18px); }
+      88%, 100% { transform:rotate(0deg); }
+    }
+    @keyframes vrw-mouth {
+      0%, 60% { transform:scaleY(1); }
+      63%, 68%, 73%, 78%, 83% { transform:scaleY(1.4); }
+      65%, 70%, 75%, 80%, 85% { transform:scaleY(1); }
+      88%, 100% { transform:scaleY(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .vr-woman .vrw-head, .vr-woman .vrw-arm-left, .vr-woman .vrw-arm-right, .vr-woman .vrw-mouth { animation:none; }
+    }
   </style>
 </head>
 <body>
@@ -693,13 +751,96 @@
       <!-- OVERVIEW -->
       <div id="section-overview" class="section active">
         <div class="overview-hero">
-          <h2 data-i18n="overview_title">Program Overview</h2>
-          <div class="overview-ticker" aria-label="Program overview headline">
-            <div class="overview-ticker-track">
-              <span class="overview-ticker-item" data-i18n="overview_sub">Kern Community College District — Tier 1 grantee, VR EEO Faculty Development and Peer Mentoring Program</span>
-              <span class="overview-ticker-item" data-i18n="overview_sub" aria-hidden="true">Kern Community College District — Tier 1 grantee, VR EEO Faculty Development and Peer Mentoring Program</span>
-              <span class="overview-ticker-item" data-i18n="overview_sub" aria-hidden="true">Kern Community College District — Tier 1 grantee, VR EEO Faculty Development and Peer Mentoring Program</span>
+          <div class="overview-hero-text">
+            <h2 data-i18n="overview_title">Program Overview</h2>
+            <div class="overview-ticker" aria-label="Program overview headline">
+              <div class="overview-ticker-track">
+                <span class="overview-ticker-item" data-i18n="overview_sub">Kern Community College District — Tier 1 grantee, VR EEO Faculty Development and Peer Mentoring Program</span>
+                <span class="overview-ticker-item" data-i18n="overview_sub" aria-hidden="true">Kern Community College District — Tier 1 grantee, VR EEO Faculty Development and Peer Mentoring Program</span>
+                <span class="overview-ticker-item" data-i18n="overview_sub" aria-hidden="true">Kern Community College District — Tier 1 grantee, VR EEO Faculty Development and Peer Mentoring Program</span>
+              </div>
             </div>
+          </div>
+          <div class="overview-hero-avatar" role="img" aria-label="Animated avatar of a woman trying on a VR headset, looking around, and clapping">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="vr-woman">
+              <defs>
+                <radialGradient id="vrwSkin" cx="42%" cy="32%" r="70%">
+                  <stop offset="0%" stop-color="#fae0c8"/>
+                  <stop offset="55%" stop-color="#e8c4a0"/>
+                  <stop offset="100%" stop-color="#b88560"/>
+                </radialGradient>
+                <linearGradient id="vrwHair" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3b2818"/>
+                  <stop offset="100%" stop-color="#1a0e08"/>
+                </linearGradient>
+                <linearGradient id="vrwShirt" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#357CAC"/>
+                  <stop offset="100%" stop-color="#22587a"/>
+                </linearGradient>
+                <linearGradient id="vrwHeadset" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2b2b2e"/>
+                  <stop offset="100%" stop-color="#0a0a0c"/>
+                </linearGradient>
+                <radialGradient id="vrwLens" cx="40%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="#9adcff"/>
+                  <stop offset="55%" stop-color="#1879d4"/>
+                  <stop offset="100%" stop-color="#062a5a"/>
+                </radialGradient>
+              </defs>
+              <!-- Standing body -->
+              <g class="vrw-body">
+                <!-- Legs -->
+                <rect x="88" y="148" width="10" height="36" rx="3" fill="#22354f"/>
+                <rect x="102" y="148" width="10" height="36" rx="3" fill="#22354f"/>
+                <!-- Torso / shirt -->
+                <path d="M68,118 Q70,108 80,104 L120,104 Q130,108 132,118 L130,152 Q100,158 70,152 Z" fill="url(#vrwShirt)"/>
+                <!-- Neck -->
+                <rect x="92" y="96" width="16" height="14" fill="url(#vrwSkin)"/>
+                <!-- Hair back -->
+                <ellipse cx="100" cy="62" rx="34" ry="32" fill="url(#vrwHair)"/>
+                <!-- Hair shoulder -->
+                <path d="M68,80 Q60,108 70,120 L82,116 Q78,100 80,80 Z" fill="url(#vrwHair)"/>
+                <path d="M132,80 Q140,108 130,120 L118,116 Q122,100 120,80 Z" fill="url(#vrwHair)"/>
+                <!-- Head group (rotates left/right) -->
+                <g class="vrw-head">
+                  <!-- Face -->
+                  <ellipse cx="100" cy="68" rx="26" ry="30" fill="url(#vrwSkin)"/>
+                  <!-- Hair front bangs -->
+                  <path d="M76,52 Q86,38 100,38 Q116,38 124,54 Q116,46 100,46 Q86,46 76,54 Z" fill="url(#vrwHair)"/>
+                  <!-- Ears -->
+                  <ellipse cx="76" cy="70" rx="4" ry="7" fill="url(#vrwSkin)"/>
+                  <ellipse cx="124" cy="70" rx="4" ry="7" fill="url(#vrwSkin)"/>
+                  <!-- VR Headset body -->
+                  <rect x="70" y="56" width="60" height="22" rx="5" fill="url(#vrwHeadset)"/>
+                  <!-- Strap behind head -->
+                  <rect x="64" y="62" width="72" height="3" rx="1.5" fill="#101013"/>
+                  <!-- Lenses -->
+                  <ellipse cx="86" cy="67" rx="7.5" ry="6" fill="#04101f"/>
+                  <ellipse cx="86" cy="67" rx="6" ry="4.6" fill="url(#vrwLens)"/>
+                  <ellipse cx="83" cy="64" rx="1.6" ry="1" fill="#ffffff" opacity="0.7"/>
+                  <ellipse cx="114" cy="67" rx="7.5" ry="6" fill="#04101f"/>
+                  <ellipse cx="114" cy="67" rx="6" ry="4.6" fill="url(#vrwLens)"/>
+                  <ellipse cx="111" cy="64" rx="1.6" ry="1" fill="#ffffff" opacity="0.7"/>
+                  <!-- LED on bridge -->
+                  <circle cx="100" cy="60" r="0.9" fill="#22ff7a" opacity="0.85"/>
+                  <!-- Mouth (smile, beats slightly with clap) -->
+                  <path class="vrw-mouth" d="M93,84 Q100,88 107,84" stroke="#7a3a22" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- Cheek -->
+                  <circle cx="83" cy="80" r="2" fill="#e0907a" opacity="0.45"/>
+                  <circle cx="117" cy="80" r="2" fill="#e0907a" opacity="0.45"/>
+                </g>
+                <!-- Left arm / hand -->
+                <g class="vrw-arm-left">
+                  <rect x="62" y="116" width="10" height="34" rx="5" fill="url(#vrwShirt)"/>
+                  <circle cx="67" cy="152" r="7" fill="url(#vrwSkin)"/>
+                </g>
+                <!-- Right arm / hand -->
+                <g class="vrw-arm-right">
+                  <rect x="128" y="116" width="10" height="34" rx="5" fill="url(#vrwShirt)"/>
+                  <circle cx="133" cy="152" r="7" fill="url(#vrwSkin)"/>
+                </g>
+              </g>
+            </svg>
           </div>
         </div>
 
@@ -1093,7 +1234,7 @@
           <div class="card-header"><div class="card-title" data-i18n="spend_table_title">Spend-Down Detail</div><div class="chart-label" data-i18n="spend_table_sub">Kern CCD · Year-by-Year Allocation vs. Spend</div></div>
           <div class="data-table-wrap">
             <table class="data-table" id="spend-table">
-              <thead><tr><th data-i18n="th_period">Period</th><th data-i18n="th_period_budget">Period Budget</th><th data-i18n="th_share">Share of Total</th><th data-i18n="th_project_year">Project Year</th><th data-i18n="th_disbursed_pct">Spent So Far</th><th data-i18n="th_spend_pace">Spend Pace</th><th data-i18n="th_status">Status</th></tr></thead>
+              <thead><tr><th data-i18n="th_period">Period</th><th class="num" data-i18n="th_period_budget">Period Budget</th><th class="num" data-i18n="th_share">Share of Total</th><th class="center" data-i18n="th_project_year">Project Year</th><th class="num" data-i18n="th_disbursed_pct">Spent So Far</th><th class="center" data-i18n="th_spend_pace">Spend Pace</th><th class="center" data-i18n="th_status">Status</th></tr></thead>
               <tbody id="spend-table-body"></tbody>
             </table>
           </div>
@@ -2328,11 +2469,11 @@ function renderSpendDown() {
       // Header summary row: read-only totals for the year, no buttons (only line items carry Pace/Status)
       const headerRow =
         '<tr class="spend-year-row" data-year-key="' + p.id + '">' +
-          '<td style="border-left:4px solid ' + yearBandColor + ';padding-left:14px;"><strong style="font-size:14px;color:var(--ccc-dark-blue);">' + p.label + '</strong><br><span style="font-size:11px;color:var(--text-muted)">' + p.dates + ' · ' + p.role + '</span></td>' +
-          '<td class="amount" style="font-weight:700;">' + fmt(p.budget) + '</td>' +
-          '<td class="amount" style="font-weight:700;">' + pct + '% of total</td>' +
-          '<td><span style="font-size:11px;color:var(--text-muted);font-weight:700;">' + p.year + '</span></td>' +
-          '<td colspan="3" style="font-size:11px;color:var(--text-muted);"><em>Year-level summary &middot; line items below carry their own pace / status</em></td>' +
+          '<td style="border-left:3px solid ' + yearBandColor + ';"><strong style="font-size:13.5px;color:var(--text-primary);letter-spacing:-0.01em;">' + p.label + '</strong><br><span style="font-size:11px;color:var(--text-muted);font-weight:500;">' + p.dates + ' · ' + p.role + '</span></td>' +
+          '<td class="amount num" style="font-weight:600;">' + fmt(p.budget) + '</td>' +
+          '<td class="num" style="font-weight:600;color:var(--text-secondary);">' + pct + '%</td>' +
+          '<td class="center"><span style="font-size:10.5px;color:var(--text-muted);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">' + p.year + '</span></td>' +
+          '<td colspan="3" class="center" style="font-size:11px;color:var(--text-muted);font-style:italic;">Year total · pace and status set per line item below</td>' +
         '</tr>';
       const lineRows = (p.lineItems || []).map((li, idx) => {
         const liId = p.id + '-li' + idx;
@@ -2346,13 +2487,13 @@ function renderSpendDown() {
         const paceColor = PACE_COLOR[pace];
         const paceText  = t('pace_' + pace);
         return '<tr class="spend-line-row" data-year-key="' + p.id + '">' +
-          '<td style="padding-left:32px;border-left:4px solid ' + yearBandColor + ';opacity:0.95;"><span style="font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:0.04em;margin-right:8px;">' + li.fy + '</span>' + codeBadge + '<span style="font-size:12.5px;color:var(--text-primary);">' + li.label + '</span></td>' +
-          '<td class="amount" style="font-size:12.5px;">' + fmt(li.amount) + '</td>' +
-          '<td class="amount" style="font-size:11.5px;color:var(--text-muted);">' + liPct + '%</td>' +
-          '<td><span style="font-size:11px;color:var(--text-muted);">part of ' + p.label + '</span></td>' +
-          '<td><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%;background:var(--text-muted)"></div></div><span style="font-size:11px;color:var(--text-muted);">0.0%</span></td>' +
-          '<td><button onclick="togglePeriodPace(this,\'' + liId + '\')" data-pace="' + pace + '" style="background:' + paceColor + ';color:#fff;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer;border:none;letter-spacing:0.02em;">' + paceText + '</button></td>' +
-          '<td><button onclick="togglePeriodStatus(this,\'' + liId + '\')" data-on="' + (isOffTrack?'0':'1') + '" style="background:' + statusColor + ';color:#fff;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer;border:none;letter-spacing:0.02em;">' + statusText + '</button></td>' +
+          '<td style="padding-left:30px;border-left:3px solid ' + yearBandColor + ';"><span style="font-size:10.5px;color:var(--text-muted);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-right:10px;">' + li.fy + '</span>' + codeBadge + '<span style="font-size:12.5px;color:var(--text-primary);">' + li.label + '</span></td>' +
+          '<td class="amount num" style="font-size:12.5px;">' + fmt(li.amount) + '</td>' +
+          '<td class="num" style="font-size:11.5px;color:var(--text-muted);">' + liPct + '%</td>' +
+          '<td class="center"><span style="font-size:10.5px;color:var(--text-muted);">part of ' + p.label + '</span></td>' +
+          '<td class="num"><div class="progress-bar-wrap" style="display:inline-block;width:60px;vertical-align:middle;margin-right:8px;"><div class="progress-bar-fill" style="width:0%;background:var(--text-muted)"></div></div><span style="font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums;">0.0%</span></td>' +
+          '<td class="center"><button class="spend-table-pill" onclick="togglePeriodPace(this,\'' + liId + '\')" data-pace="' + pace + '" style="color:' + paceColor + ';">' + paceText + '</button></td>' +
+          '<td class="center"><button class="spend-table-pill" onclick="togglePeriodStatus(this,\'' + liId + '\')" data-on="' + (isOffTrack?'0':'1') + '" style="color:' + statusColor + ';">' + statusText + '</button></td>' +
         '</tr>';
       }).join('');
       return headerRow + lineRows;
