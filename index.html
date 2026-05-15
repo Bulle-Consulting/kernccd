@@ -202,16 +202,17 @@
     .card-header { padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--bg-surface-2); }
     .card-title { font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--text-primary); }
     .card-body { padding:20px; }
-    .data-table-wrap { overflow-x:auto; border-radius:var(--radius-md); }
-    .data-table { width:100%; font-size:13px; border-collapse:collapse; }
-    .data-table th { font-size:10.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); padding:14px 18px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; background:transparent; }
-    .data-table th.num, .data-table td.num { text-align:right; font-variant-numeric:tabular-nums; }
-    .data-table th.center, .data-table td.center { text-align:center; }
-    .data-table td { padding:13px 18px; border-bottom:1px solid var(--border); vertical-align:middle; color:var(--text-primary); }
+    .data-table-wrap { overflow-x:auto; }
+    .data-table { width:100%; font-size:13px; }
+    .data-table th { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-secondary); padding:11px 16px; text-align:left; border-bottom:2px solid var(--border); white-space:nowrap; background:var(--bg-surface-2); }
+    .data-table td { padding:11px 16px; border-bottom:1px solid var(--border); vertical-align:middle; }
     .data-table tr:last-child td { border-bottom:none; }
     .data-table tr:hover td { background:var(--bg-surface-2); }
-    .data-table .amount { font-family:var(--font-body); font-weight:500; font-size:13px; color:var(--text-primary); font-variant-numeric:tabular-nums; }
-    [data-theme="dark"] .data-table .amount { color:var(--text-primary); }
+    .data-table .amount { font-family:var(--font-body); font-weight:600; font-size:13px; color:var(--ccc-dark-blue); }
+    [data-theme="dark"] .data-table .amount { color:var(--accent-light); }
+    /* Alignment helpers — added only to keep columns lined up; visual styling unchanged */
+    .data-table th.num, .data-table td.num { text-align:right; font-variant-numeric:tabular-nums; }
+    .data-table th.center, .data-table td.center { text-align:center; }
     .tier-badge { position:relative; display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:20px; font-size:11px; font-weight:700; white-space:nowrap; }
     .tier-badge.tier1 { background:var(--tier1-bg); color:var(--tier1-color); }
     .tier-badge.tier2 { background:var(--tier2-bg); color:var(--tier2-color); }
@@ -287,13 +288,10 @@
     body[data-year-filter="y2"] .spend-year-row[data-year-key="y1"],
     body[data-year-filter="y2"] .spend-line-row[data-year-key="y1"] { display:none; }
     /* ════════════ SPEND-DOWN — line-item detail rows ════════════ */
-    .spend-year-row td { background:rgba(0,107,103,0.04); padding-top:14px; padding-bottom:14px; border-top:1px solid var(--border); }
-    [data-theme="dark"] .spend-year-row td { background:rgba(64,180,229,0.05); }
-    .spend-line-row td { padding-top:10px; padding-bottom:10px; background:transparent; border-bottom:1px solid var(--border); }
-    .spend-line-row:hover td { background:var(--bg-surface-2); }
-    .spend-table-pill { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:14px; font-size:11px; font-weight:600; letter-spacing:0.02em; white-space:nowrap; border:1px solid currentColor; background:transparent; cursor:pointer; transition:all 140ms ease; }
-    .spend-table-pill:hover { filter:brightness(1.08); }
-    .spend-table-pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+    .spend-year-row td { background:rgba(0,47,109,0.04); padding-top:12px; padding-bottom:12px; }
+    [data-theme="dark"] .spend-year-row td { background:rgba(64,180,229,0.06); }
+    .spend-line-row td { padding-top:7px; padding-bottom:7px; background:var(--bg-card); border-bottom:1px solid var(--border); }
+    .spend-line-row:hover td { background:var(--bg-surface); }
     /* ════════════ GOALS & OBJECTIVES ════════════ */
     .goals-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:24px; }
     @media (max-width:1080px) { .goals-grid { grid-template-columns:1fr; } }
@@ -2469,11 +2467,11 @@ function renderSpendDown() {
       // Header summary row: read-only totals for the year, no buttons (only line items carry Pace/Status)
       const headerRow =
         '<tr class="spend-year-row" data-year-key="' + p.id + '">' +
-          '<td style="border-left:3px solid ' + yearBandColor + ';"><strong style="font-size:13.5px;color:var(--text-primary);letter-spacing:-0.01em;">' + p.label + '</strong><br><span style="font-size:11px;color:var(--text-muted);font-weight:500;">' + p.dates + ' · ' + p.role + '</span></td>' +
-          '<td class="amount num" style="font-weight:600;">' + fmt(p.budget) + '</td>' +
-          '<td class="num" style="font-weight:600;color:var(--text-secondary);">' + pct + '%</td>' +
-          '<td class="center"><span style="font-size:10.5px;color:var(--text-muted);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">' + p.year + '</span></td>' +
-          '<td colspan="3" class="center" style="font-size:11px;color:var(--text-muted);font-style:italic;">Year total · pace and status set per line item below</td>' +
+          '<td style="border-left:4px solid ' + yearBandColor + ';padding-left:14px;"><strong style="font-size:14px;color:var(--ccc-dark-blue);">' + p.label + '</strong><br><span style="font-size:11px;color:var(--text-muted)">' + p.dates + ' · ' + p.role + '</span></td>' +
+          '<td class="amount num" style="font-weight:700;">' + fmt(p.budget) + '</td>' +
+          '<td class="amount num" style="font-weight:700;">' + pct + '% of total</td>' +
+          '<td class="center"><span style="font-size:11px;color:var(--text-muted);font-weight:700;">' + p.year + '</span></td>' +
+          '<td colspan="3" class="center" style="font-size:11px;color:var(--text-muted);"><em>Year-level summary &middot; line items below carry their own pace / status</em></td>' +
         '</tr>';
       const lineRows = (p.lineItems || []).map((li, idx) => {
         const liId = p.id + '-li' + idx;
@@ -2487,13 +2485,13 @@ function renderSpendDown() {
         const paceColor = PACE_COLOR[pace];
         const paceText  = t('pace_' + pace);
         return '<tr class="spend-line-row" data-year-key="' + p.id + '">' +
-          '<td style="padding-left:30px;border-left:3px solid ' + yearBandColor + ';"><span style="font-size:10.5px;color:var(--text-muted);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-right:10px;">' + li.fy + '</span>' + codeBadge + '<span style="font-size:12.5px;color:var(--text-primary);">' + li.label + '</span></td>' +
+          '<td style="padding-left:32px;border-left:4px solid ' + yearBandColor + ';opacity:0.95;"><span style="font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:0.04em;margin-right:8px;">' + li.fy + '</span>' + codeBadge + '<span style="font-size:12.5px;color:var(--text-primary);">' + li.label + '</span></td>' +
           '<td class="amount num" style="font-size:12.5px;">' + fmt(li.amount) + '</td>' +
-          '<td class="num" style="font-size:11.5px;color:var(--text-muted);">' + liPct + '%</td>' +
-          '<td class="center"><span style="font-size:10.5px;color:var(--text-muted);">part of ' + p.label + '</span></td>' +
-          '<td class="num"><div class="progress-bar-wrap" style="display:inline-block;width:60px;vertical-align:middle;margin-right:8px;"><div class="progress-bar-fill" style="width:0%;background:var(--text-muted)"></div></div><span style="font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums;">0.0%</span></td>' +
-          '<td class="center"><button class="spend-table-pill" onclick="togglePeriodPace(this,\'' + liId + '\')" data-pace="' + pace + '" style="color:' + paceColor + ';">' + paceText + '</button></td>' +
-          '<td class="center"><button class="spend-table-pill" onclick="togglePeriodStatus(this,\'' + liId + '\')" data-on="' + (isOffTrack?'0':'1') + '" style="color:' + statusColor + ';">' + statusText + '</button></td>' +
+          '<td class="amount num" style="font-size:11.5px;color:var(--text-muted);">' + liPct + '%</td>' +
+          '<td class="center"><span style="font-size:11px;color:var(--text-muted);">part of ' + p.label + '</span></td>' +
+          '<td><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%;background:var(--text-muted)"></div></div><span style="font-size:11px;color:var(--text-muted);">0.0%</span></td>' +
+          '<td class="center"><button onclick="togglePeriodPace(this,\'' + liId + '\')" data-pace="' + pace + '" style="background:' + paceColor + ';color:#fff;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer;border:none;letter-spacing:0.02em;">' + paceText + '</button></td>' +
+          '<td class="center"><button onclick="togglePeriodStatus(this,\'' + liId + '\')" data-on="' + (isOffTrack?'0':'1') + '" style="background:' + statusColor + ';color:#fff;padding:3px 12px;border-radius:14px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer;border:none;letter-spacing:0.02em;">' + statusText + '</button></td>' +
         '</tr>';
       }).join('');
       return headerRow + lineRows;
