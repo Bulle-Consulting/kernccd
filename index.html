@@ -2800,21 +2800,41 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeUntil = 0;
   function easeTowards(curr, target, k){ return curr + (target - curr) * k; }
   let curYaw = 0, curPitch = 0, tgtYaw = 0, tgtPitch = 0;
-  let pupilDX = 0, pupilDY = 0;
-  function loop(){
-    curYaw   = easeTowards(curYaw,   tgtYaw,   0.15);
-    curPitch = easeTowards(curPitch, tgtPitch, 0.15);
-    head.style.transform = `perspective(520px) rotateY(${curYaw}deg) rotateX(${curPitch}deg)`;
-    pupils.forEach(p => {
-      const cx = parseFloat(p.dataset.cx);
-      const cy = parseFloat(p.dataset.cy);
-      p.setAttribute('cx', cx + pupilDX);
-      p.setAttribute('cy', cy + pupilDY);
-    });
-    requestAnimationFrame(loop);
+  let curPupilDX = 0, curPupilDY = 0, pupilDX = 0, pupilDY = 0;
+  // Skip the per-frame DOM writes once we've settled within this much of the target.
+  const EPS = 0.05;
+  let lastWrittenYaw = NaN, lastWrittenPitch = NaN;
+  let lastWrittenPDX = NaN, lastWrittenPDY = NaN;
+  let visible = true, rafId = 0, running = false;
+  function frame(){
+    rafId = 0;
+    curYaw     = easeTowards(curYaw,     tgtYaw,     0.15);
+    curPitch   = easeTowards(curPitch,   tgtPitch,   0.15);
+    curPupilDX = easeTowards(curPupilDX, pupilDX,    0.18);
+    curPupilDY = easeTowards(curPupilDY, pupilDY,    0.18);
+    if (Math.abs(curYaw - lastWrittenYaw) > EPS || Math.abs(curPitch - lastWrittenPitch) > EPS) {
+      head.style.transform = `perspective(520px) rotateY(${curYaw.toFixed(2)}deg) rotateX(${curPitch.toFixed(2)}deg)`;
+      lastWrittenYaw = curYaw; lastWrittenPitch = curPitch;
+    }
+    if (Math.abs(curPupilDX - lastWrittenPDX) > EPS || Math.abs(curPupilDY - lastWrittenPDY) > EPS) {
+      pupils.forEach(p => {
+        p.setAttribute('cx', parseFloat(p.dataset.cx) + curPupilDX);
+        p.setAttribute('cy', parseFloat(p.dataset.cy) + curPupilDY);
+      });
+      lastWrittenPDX = curPupilDX; lastWrittenPDY = curPupilDY;
+    }
+    const settled = Math.abs(curYaw - tgtYaw) < EPS && Math.abs(curPitch - tgtPitch) < EPS
+                 && Math.abs(curPupilDX - pupilDX) < EPS && Math.abs(curPupilDY - pupilDY) < EPS;
+    if (settled) { running = false; return; }
+    rafId = requestAnimationFrame(frame);
   }
-  loop();
+  function kick(){
+    if (running || !visible) return;
+    running = true;
+    rafId = requestAnimationFrame(frame);
+  }
   function onMove(e){
+    if (!visible) return;
     const r = avatar.getBoundingClientRect();
     const dx = (e.clientX - (r.left + r.width/2)) / r.width;   // -1..+1 range when within ~one width
     const dy = (e.clientY - (r.top  + r.height/2)) / r.height;
@@ -2823,6 +2843,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pupilDX  = Math.max(-1.6, Math.min(1.6, dx * 2.4));
     pupilDY  = Math.max(-1.2, Math.min(1.2, dy * 1.8));
     activeUntil = Date.now() + 2000;
+    kick();
   }
   document.addEventListener('mousemove', onMove, {passive:true});
   /* Idle loop: when cursor is quiet, glance around naturally */
@@ -2835,17 +2856,32 @@ document.addEventListener('DOMContentLoaded', () => {
     {y:  0,  p: 18,  px:0,   py:-1.0},
     {y:  0,  p:  0,  px:0,   py:0},
   ];
-  let idleIdx = 0;
+  let idleIdx = 0, idleTimer = 0;
   function idleStep(){
-    if (Date.now() < activeUntil) return;
+    if (!visible || Date.now() < activeUntil) return;
     const pose = idlePoses[idleIdx % idlePoses.length];
-    tgtYaw   = pose.y;
-    tgtPitch = pose.p;
-    pupilDX  = pose.px;
-    pupilDY  = pose.py;
+    tgtYaw  = pose.y;  tgtPitch = pose.p;
+    pupilDX = pose.px; pupilDY  = pose.py;
     idleIdx++;
+    kick();
   }
-  setInterval(idleStep, 1500);
+  function startIdle(){ if (!idleTimer) idleTimer = setInterval(idleStep, 1500); }
+  function stopIdle(){ if (idleTimer) { clearInterval(idleTimer); idleTimer = 0; } }
+  // Pause animation while the avatar is off-screen or the tab is hidden.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting && !document.hidden;
+      if (visible) { startIdle(); kick(); } else { stopIdle(); if (rafId) { cancelAnimationFrame(rafId); rafId = 0; } running = false; }
+    }, { threshold: 0.01 }).observe(avatar);
+  } else {
+    startIdle();
+  }
+  document.addEventListener('visibilitychange', () => {
+    const wasVisible = visible;
+    visible = !document.hidden && avatar.getBoundingClientRect().bottom > 0;
+    if (visible && !wasVisible) { startIdle(); kick(); }
+    else if (!visible && wasVisible) { stopIdle(); if (rafId) { cancelAnimationFrame(rafId); rafId = 0; } running = false; }
+  });
 })();
 </script>
 </body>
