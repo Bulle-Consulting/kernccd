@@ -1167,17 +1167,17 @@ const districts = [
       'Leadership Pipeline Development: ≥40% of Year-1 participants advance to mentor roles in Year-2 and ≥25% of alumni document new leadership/service in professional portfolios',
       'Student Engagement & Equity: In participating sections, ≥70% of students report increased engagement/interest (post-lesson survey), with no engagement gap >10 percentage points between student demographic groups'
     ],
-    contact:{name:'Bobby Becka',role:'Project Lead Contact',email:'bobby.becka@kccd.edu',phone:'(661) 395-4102',photo:'photos/bobby-beck.jpeg'},
-    altContact:{name:'Dr. Bonita Steele',role:'Alternate Project Lead Contact',email:'bsteele@kccd.edu',phone:'(661) 336-5046',photo:'photos/bonita-steele.jpeg'},
-    fiscalReporter:{name:'Cathi Jacob',role:'Institution Project Fiscal Reporter',email:'cjacob@kccd.edu',phone:'(661) 336-5105'},
-    planApprover:{name:'Dr. Melissa Thornsberry',role:'Plan Approver',email:'melissa.thornsberry@kccd.edu',phone:'(661) 336-5142',photo:'photos/melissa-thornsberry.jpg'},
+    contact:{name:'Bobby Becka',title:'Director, Grants & Resource Development · Workforce & Economic Development',role:'Project Lead Contact',email:'bobby.becka@kccd.edu',phone:'(661) 395-4102',photo:'photos/bobby-beck.jpeg'},
+    altContact:{name:'Dr. Bonita Steele',title:'Director, Programs and Program Development · Workforce & Economic Development',role:'Alternate Project Lead Contact',email:'bsteele@kccd.edu',phone:'(661) 336-5046',photo:'photos/bonita-steele.jpeg'},
+    fiscalReporter:{name:'Cathi Jacob',title:'Accounting Manager · Business Services',role:'Institution Project Fiscal Reporter',email:'cjacob@kccd.edu',phone:'(661) 336-5105'},
+    planApprover:{name:'Dr. Melissa Thornsberry',title:'Vice Chancellor, Finance & Administrative Services · Chief Financial Officer',role:'Plan Approver',email:'melissa.thornsberry@kccd.edu',phone:'(661) 336-5142',photo:'photos/melissa-thornsberry.jpg'},
     additionalContacts:[
-      {name:'Rachel Tatro-Duarte',role:'Project Lead Contact (Porterville)',email:'rachel.tatroduarte@portervillecollege.edu',phone:'',photo:'photos/rachel-tatro-duarte.png'},
-      {name:'Todd Coston',role:'Project Lead Contact · AVC Planning & Educational Technology',email:'tcoston@kccd.edu',phone:'(661) 336-5078',photo:'photos/todd-coston.jpeg'},
-      {name:'Tanumeet Kaur',role:'Institution Project Fiscal Reporter · Director, Budget Operations',email:'tanumeet.kaur@kccd.edu',phone:'(661) 336-5124',photo:'photos/tanumeet-kaur.png'},
-      {name:'Jonathan Kim',role:'Institution Project Fiscal Reporter',email:'jonathan.kim@kccd.edu',phone:'(661) 336-5109',photo:'photos/jonathan-kim.png'},
-      {name:'Bryan Lainez',role:'Institution Project Fiscal Reporter',email:'bryan.lainez@kccd.edu',phone:''},
-      {name:'Marisol Cuevas',role:'Institution Project Fiscal Reporter',email:'marisol.cuevas@kccd.edu',phone:'(661) 336-5110'}
+      {name:'Dr. Rachel Tatro-Duarte',title:'Professor of English & VR Coordinator · Porterville College',role:'Project Lead Contact (Porterville)',email:'rachel.tatroduarte@portervillecollege.edu',phone:'',photo:'photos/rachel-tatro-duarte.png'},
+      {name:'Todd Coston',title:'Associate Vice Chancellor, Planning & Educational Technology · Educational Services',role:'Project Lead Contact',email:'tcoston@kccd.edu',phone:'(661) 336-5078',photo:'photos/todd-coston.jpeg'},
+      {name:'Tanumeet Kaur',title:'Director, Budget Operations · Business Services',role:'Institution Project Fiscal Reporter',email:'tanumeet.kaur@kccd.edu',phone:'(661) 336-5124',photo:'photos/tanumeet-kaur.png'},
+      {name:'Jonathan Kim',title:'Business Services',role:'Institution Project Fiscal Reporter',email:'jonathan.kim@kccd.edu',phone:'(661) 336-5109',photo:'photos/jonathan-kim.png'},
+      {name:'Bryan Lainez',title:'Business Services',role:'Institution Project Fiscal Reporter',email:'bryan.lainez@kccd.edu',phone:''},
+      {name:'Marisol Cuevas',title:'Accounting Coordinator · Business Services',role:'Institution Project Fiscal Reporter',email:'marisol.cuevas@kccd.edu',phone:'(661) 336-5110'}
     ],
     fundMonitor:{name:'Bulle Consulting',role:'Grant Monitor',email:'admin@bulleconsulting.com',phone:''},
     budgetHighlights:{'Instructional Salaries (1000)':32660,'Employee Benefits (3000)':7074,'Supplies and Materials (4000)':90750,'Other Operating Expenses and Services (5000)':12020,'Indirect Costs (7000)':7496},
@@ -2047,7 +2047,7 @@ function renderContacts() {
         ${photoBlock}
         <div class="contact-card-body">
           <div class="contact-card-name">${p.name}</div>
-          <div class="contact-card-title">${translateRole(p.role)}</div>
+          <div class="contact-card-title">${p.title || translateRole(p.role)}</div>
           <div class="contact-card-role">${translateRole(p.role)}</div>
           <div class="contact-card-divider"></div>
           <div class="contact-card-links">
