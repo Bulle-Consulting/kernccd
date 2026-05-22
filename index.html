@@ -165,7 +165,10 @@
       letter-spacing:0.06em;
       box-shadow:0 1px 3px rgba(0,0,0,0.18);
     }
-    .kpi-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px 14px; box-shadow:var(--shadow-sm); transition:box-shadow var(--transition),transform var(--transition); min-width:0; }
+    .kpi-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px 14px; box-shadow:var(--shadow-sm); transition:box-shadow var(--transition),transform var(--transition); min-width:0; display:flex; flex-direction:column; min-height:118px; }
+    .kpi-card .kpi-label { min-height:14px; }
+    .kpi-card .kpi-value { margin-top:auto; }
+    .kpi-card .kpi-sub   { margin-top:6px; min-height:34px; }
     .kpi-card:hover { box-shadow:var(--shadow-md); transform:translateY(-1px); }
     .kpi-label { font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
     .kpi-value { font-family:var(--font-display); font-size:28px; font-weight:600; line-height:1; margin-bottom:4px; }
@@ -947,10 +950,10 @@
         </div>
 
         <div class="kpi-grid">
-          <div class="kpi-card"><div class="kpi-accent-bar blue"></div><div class="kpi-label" data-i18n="kpi_total_funding">Total Grant Funding</div><div class="kpi-value blue">$150,000</div><div class="kpi-sub" data-i18n="kpi_across">VR Faculty Development &amp; Peer Mentoring</div></div>
+          <div class="kpi-card"><div class="kpi-accent-bar blue"></div><div class="kpi-label" data-i18n="kpi_total_funding">Total Funding</div><div class="kpi-value blue">$150,000</div><div class="kpi-sub" data-i18n="kpi_across">VR Faculty Development &amp; Peer Mentoring</div></div>
           <div class="kpi-card"><div class="kpi-accent-bar medium-blue"></div><div class="kpi-label" data-i18n="kpi_grant_tier">Grant Tier</div><div class="kpi-value medium-blue">Tier 1</div><div class="kpi-sub" data-i18n="kpi_grant_tier_sub">2026&ndash;2028 EEO IBP</div></div>
           <div class="kpi-card"><div class="kpi-accent-bar blue"></div><div class="kpi-label" data-i18n="kpi_dr_target">Faculty Trained</div><div class="kpi-value blue">&ge; 30</div><div class="kpi-sub" data-i18n="kpi_dr_target_sub">Across all 3 Kern colleges</div></div>
-          <div class="kpi-card"><div class="kpi-accent-bar medium-blue"></div><div class="kpi-label" data-i18n="kpi_mentor_target">Participating Colleges</div><div class="kpi-value medium-blue">3</div><div class="kpi-sub" data-i18n="kpi_mentor_target_sub">Bakersfield &middot; Cerro Coso &middot; Porterville</div></div>
+          <div class="kpi-card"><div class="kpi-accent-bar medium-blue"></div><div class="kpi-label" data-i18n="kpi_mentor_target">Colleges</div><div class="kpi-value medium-blue">3</div><div class="kpi-sub" data-i18n="kpi_mentor_target_sub">Bakersfield &middot; Cerro Coso &middot; Porterville</div></div>
           <div class="kpi-card"><div class="kpi-accent-bar grey"></div><div class="kpi-label" data-i18n="kpi_focus">Focus Areas</div><div class="kpi-value grey">4</div><div class="kpi-sub" data-i18n="kpi_focus_sub">VR Pedagogy &middot; Peer Mentoring &middot; Inclusive Design &middot; Leadership Pipeline</div></div>
         </div>
 
@@ -1405,7 +1408,7 @@ const translations = {
     goals_title:'Goals & Objectives', goals_sub:'Project goals from the Kern CCD workplan (Section 2.1) — paired with the two-year activities, five measurable outcomes, and responsible leadership.',
     overview_title:'Program Overview', overview_sub:'Kern Community College District — Tier 1 grantee, VR EEO Faculty Development and Peer Mentoring Program. $150,000 award from the 2026–2028 EEO IBP grant cycle, across Bakersfield, Cerro Coso, and Porterville colleges.',
     meta_monitor:'Grant Monitor', meta_grantid:'Grant ID', meta_start:'Start', meta_duration:'Funding Cycle', meta_status:'Status',
-    kpi_total_funding:'Total Grant Funding', kpi_across:'VR Faculty Development &amp; Peer Mentoring',
+    kpi_total_funding:'Total Funding', kpi_across:'VR Faculty Development &amp; Peer Mentoring',
     kpi_total_districts:'Total Districts', kpi_all_submitted:'All submitted',
     kpi_tier1:'Tier 1 Districts', kpi_tier1_sub:'$150K each (avg)',
     kpi_tier2:'Tier 2 Districts', kpi_tier2_sub:'$100K each',
@@ -1501,7 +1504,7 @@ const translations = {
     th_project_year:'Project Year',
     kpi_dr_target:'DRS Trained',
     kpi_dr_target_sub:'Classified staff over two cohorts',
-    kpi_mentor_target:'Mentor Cohort',
+    kpi_mentor_target:'Colleges',
     kpi_mentor_target_sub:'4 faculty mentors · 8 mentees', kpi_grant_tier:'Grant Tier', kpi_grant_tier_sub:'2026–2028 EEO IBP', kpi_colleges:'Participating Colleges', kpi_colleges_sub:'Bakersfield · Cerro Coso · Porterville', kpi_faculty_target:'Faculty Target', kpi_faculty_target_sub:'Trained across the district by Year 2',},
   es: {
     nav_overview:'Resumen', nav_goals:'Metas y Objetivos', nav_districts:'Perfil del Proyecto', nav_outcomes:'Resultados', nav_budget:'Presupuesto', nav_timeline:'Cronograma', nav_contacts:'Contactos', nav_spenddown:'Monitor de Gastos',
