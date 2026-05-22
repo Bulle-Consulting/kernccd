@@ -165,11 +165,11 @@
       letter-spacing:0.06em;
       box-shadow:0 1px 3px rgba(0,0,0,0.18);
     }
-    .kpi-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:14px 14px 14px; box-shadow:var(--shadow-sm); transition:box-shadow var(--transition),transform var(--transition); min-width:0; display:grid; grid-template-rows:14px 1fr auto; row-gap:6px; align-items:start; }
-    .kpi-card .kpi-accent-bar { grid-row:1 / 2; align-self:start; }
-    .kpi-card .kpi-label { grid-row:1 / 2; align-self:start; }
-    .kpi-card .kpi-value { grid-row:2 / 3; align-self:start; margin:0; }
-    .kpi-card .kpi-sub   { grid-row:3 / 4; align-self:end; margin:0; }
+    .kpi-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px 14px; box-shadow:var(--shadow-sm); transition:box-shadow var(--transition),transform var(--transition); min-width:0; display:flex; flex-direction:column; min-height:132px; }
+    .kpi-card .kpi-accent-bar { margin-bottom:10px; }
+    .kpi-card .kpi-label { margin:0 0 8px; min-height:14px; }
+    .kpi-card .kpi-value { margin:0 0 4px; }
+    .kpi-card .kpi-sub   { margin:0; }
     .kpi-card:hover { box-shadow:var(--shadow-md); transform:translateY(-1px); }
     .kpi-label { font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
     .kpi-value { font-family:var(--font-display); font-size:28px; font-weight:600; line-height:1; margin-bottom:4px; }
