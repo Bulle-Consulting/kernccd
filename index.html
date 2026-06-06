@@ -2475,11 +2475,11 @@ function renderOutcomes() {
    downstream total updates live.
 ════════════════════════════════════════════════════════════════ */
 const BUDGET_BASELINE = [
-  { code:'1000', label:'Instructional Salaries',     y1:26128, y2: 6532 },
-  { code:'3000', label:'Employee Benefits',          y1: 5659, y2: 1415 },
-  { code:'4000', label:'Supplies & Materials',       y1:75000, y2:15750 },
-  { code:'5000', label:'Other Operating & Services', y1: 9613, y2: 2407 },
-  { code:'7000', label:'Indirect',                   y1: 6238, y2: 1258 }
+  { code:'1000', label:'Instructional Salaries',     y1:14400, y2:18260 },
+  { code:'3000', label:'Employee Benefits',          y1: 3120, y2: 3954 },
+  { code:'4000', label:'Supplies & Materials',       y1:86750, y2:    0 },
+  { code:'5000', label:'Other Operating & Services', y1:12240, y2: 3780 },
+  { code:'7000', label:'Indirect',                   y1: 6128, y2: 1368 }
 ];
 // Working copy that modifications mutate (deep clone of the baseline).
 let BUDGET_MODEL = BUDGET_BASELINE.map(r => ({ ...r }));
@@ -2547,8 +2547,8 @@ function renderBudget() {
   const Y2 = BUDGET_MODEL.map(r => ({ code:r.code, label:`${r.code} - ${r.label}`, amount:r.y2 }));
   const Y1_TOTAL = Y1.reduce((s,r) => s + r.amount, 0);
   const Y2_TOTAL = Y2.reduce((s,r) => s + r.amount, 0);
-  const Y1_NOTE = 'Y1 (18 months) is hardware-heavy: VR headsets and peripherals for Bakersfield, Cerro Coso, and Porterville dominate the 4000 line; faculty stipends and the first peer-mentor cohort launch in Fall 2026.';
-  const Y2_NOTE = 'Y2 (12 months) emphasizes services (Unity / VR creation training, dissemination, final showcase) plus supplemental hardware and Faculty Innovation Stipends.';
+  const Y1_NOTE = 'Y1 (18 months) is hardware-heavy: the 4000 line ($86,750) covers Meta Quest 3 VR headsets, storage carts, and development computers for Bakersfield, Cerro Coso, and Porterville; faculty training stipends begin in 2026-27.';
+  const Y2_NOTE = 'Y2 (12 months) shifts to faculty stipends and Faculty Innovation Stipends (1000) plus VR headset-management software (5000); no new hardware is purchased.';
   const renderLines = (rows, total) => rows.map(r => {
     const isIndirect = r.code === '7000';
     const cls = isIndirect ? ' indirect-line' : '';
